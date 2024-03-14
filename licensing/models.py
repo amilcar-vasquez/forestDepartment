@@ -1,4 +1,5 @@
 from django.db import models
+from styleguide_example.users.models import BaseUser
 
 # Create your models here.
 class Application(models.Model):
@@ -50,6 +51,7 @@ class Application(models.Model):
     date_expires = models.DateField(blank=True, null=True)
     packaging_list_approved = models.BooleanField()
     approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True)
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.importer_name
