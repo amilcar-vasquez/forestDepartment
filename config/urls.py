@@ -17,10 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from licensing import views as licensing_views
 
 urlpatterns = [
+    path("", licensing_views.index, name="home"),
     path("admin/", admin.site.urls),
+    path("licensing/", include('licensing.urls')),
     path("api/", include(("styleguide_example.api.urls", "api"))),
+    path("", include("pwa.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 from config.settings.debug_toolbar.setup import DebugToolbarSetup  # noqa

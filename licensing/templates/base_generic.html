@@ -2,15 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load pwa %}
-    {% progressive_web_app_meta %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Little Brother Brewing Run Club - Dashboard</title>
+    <title>Forestry Licensing - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -36,7 +34,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Little Brother Brewing</div>
+                <div class="sidebar-brand-text mx-3">Forestry Licensing</div>
             </a>
 
             <!-- Divider -->
@@ -45,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/members">
+                <a class="nav-link" href="/licensing">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -57,17 +55,11 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/members/coupons">
+                <a class="nav-link" href="/licensing/applications">
                     <i class="fas fa-fw fa-ticket-alt"></i>
-                    <span>Beer Ticket</span></a>
+                    <span>Applications</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/members/checkins">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Check-Ins</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -157,7 +149,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/members/profile">
+                                <a class="dropdown-item" href="/licensing/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -165,7 +157,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a> -->
-                                <a class="dropdown-item" href="/members/checkins">
+                                <a class="dropdown-item" href="/licensing/activity">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
