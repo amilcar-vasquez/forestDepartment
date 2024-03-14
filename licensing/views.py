@@ -35,6 +35,13 @@ def application(request):
     return render(request, 'licensing/application.html', {'form': form})
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/licensing')    
+    template = loader.get_template('licensing/login.html')
+    context = {}
+    return HttpResponse(template.render(context, request)) 
+
+def authorize(request):
     code = request.GET['code']
     email = request.GET['email']
     remember_me = request.GET.get('remember_me', False)
