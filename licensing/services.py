@@ -7,8 +7,10 @@ from django.core.exceptions import ValidationError
 from datetime import datetime, date
 
 def add_application(form, request):
-	try:
+	try:		
 		member = form.save()
+		member.user = request.user
+		member.save()
 	except ValidationError:
 		messages.add_message(request,messages.ERROR, 'User with this Email address already exists')
 		return False

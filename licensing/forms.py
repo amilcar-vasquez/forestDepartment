@@ -7,7 +7,9 @@ class ApplicationForm(ModelForm):
 
 	class Meta:
 		model = Application
-		fields = ['type', 'importer_name', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number']
+		fields = ['type', 'importer_name', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 'description_of_goods'
+			]
 		
 	def __init__(self, *args, **kwargs):
 		super(ApplicationForm, self).__init__(*args, **kwargs)

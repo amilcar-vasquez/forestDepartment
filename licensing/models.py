@@ -1,5 +1,6 @@
 from django.db import models
 from styleguide_example.users.models import BaseUser
+from datetime import datetime, date
 
 # Create your models here.
 class Application(models.Model):
@@ -45,13 +46,13 @@ class Application(models.Model):
     port_of_entry = models.CharField(max_length=100)
     port_of_exit = models.CharField(max_length=100)
     treatment = models.CharField(max_length=100, choices=TREATMENT_CHOICES)
-    description_of_goods = models.ManyToManyField('Goods', through='Species')
-    date_received = models.DateField()
+    description_of_goods = models.ManyToManyField('Goods', through='Species', blank=True, null=True)
+    date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)
     date_expires = models.DateField(blank=True, null=True)
-    packaging_list_approved = models.BooleanField()
-    approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True)
-    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE)
+    packaging_list_approved = models.BooleanField(default=False)
+    approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True, default='Not Approved')
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.importer_name
@@ -63,13 +64,13 @@ class Goods(models.Model):
         return self.local_name
     
 class Species(models.Model):
-    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE, blank=True, null=True)
     goods = models.ForeignKey(Goods, on_delete=models.CASCADE)
     scientific_name = models.CharField(max_length=100)
-    quantity = models.IntegerField()    
-    grade = models.CharField(max_length=100)
-    value = models.DecimalField(max_digits=10, decimal_places=2)
-    remarks = models.CharField(max_length=100)
+    quantity = models.IntegerField(default=1)    
+    grade = models.CharField(max_length=100, blank=True, null=True)
+    value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    remarks = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.scientific_name

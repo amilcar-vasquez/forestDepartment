@@ -36,7 +36,7 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <!--<img src="{% static 'img/logo3.png' %}" alt="..."> -->
+                                <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
                                 <h1 class="h4 text-gray-900 mb-4">New Application</h1>
                             </div>
                             <form action="/licensing/application" method="POST" class="user">
@@ -67,6 +67,10 @@
                                 <div class="form-group">
                                     {{ form.importer_email.errors }}
                                     {{ form.importer_email|placeholder:'Importer Email' }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.importer_social.errors }}
+                                    {{ form.importer_social|placeholder:'Importer Social Security #' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -102,8 +106,67 @@
                                         {{ form.importer_country|placeholder:'Country' }}
                                     </div>
                                 </div>
-                               
-                                <input type="submit" value="Appply Now" class="btn btn-primary btn-user btn-block" />     
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Info</h2>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.exporter_name.errors }}
+                                    {{ form.exporter_name|placeholder:'Exporter Name' }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.exporter_address.errors }}
+                                    {{ form.exporter_address|placeholder:'Address' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       {{ form.exporter_city.errors }}
+                                       {{ form.exporter_city|placeholder:'City' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.exporter_zip.errors }}
+                                        {{ form.exporter_zip|placeholder:'Zip' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       {{ form.exporter_state.errors }}
+                                       {{ form.exporter_state|placeholder:'State' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.exporter_country.errors }}
+                                        {{ form.exporter_country|placeholder:'Country' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.mode_of_transport.errors }}
+                                    {{ form.mode_of_transport|placeholder:'Mode of Transport' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       {{ form.port_of_entry.errors }}
+                                       {{ form.port_of_entry|placeholder:'Entry Port' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.port_of_exit.errors }}
+                                        {{ form.port_of_exit|placeholder:'Exit Port' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       {{ form.treatment.errors }}
+                                       {{ form.treatment|placeholder:'Treatment' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.description_of_goods.errors }}
+                                        {{ form.description_of_goods|placeholder:'Description' }}
+                                    </div>
+                                </div>
+                                <input type="submit" value="Apply Now" class="btn btn-primary btn-user btn-block" />     
                             </form>
                             <hr>
                             <div class="text-center">

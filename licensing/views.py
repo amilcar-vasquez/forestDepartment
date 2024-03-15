@@ -12,10 +12,16 @@ from styleguide_example.users.models import BaseUser
 
 # Create your views here.
 def index(request):
-    return render(request, 'licensing/index.html')
+    if request.user.is_authenticated:
+        return render(request, 'licensing/index.html')
+    return redirect('/licensing/login')
+    
 
 def application(request):
     # if this is a POST request we need to process the form data
+    if request.user.is_authenticated == False:
+        messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
+        return redirect('/licensing/login')
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
@@ -26,7 +32,7 @@ def application(request):
             # redirect to a new URL:            
             new_application = add_application(form, request)
             if new_application != False:
-                messages.add_message(request, messages.SUCCESS, 'Signup Successful')
+                messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/login')
             return render(request, 'licensing/application.html', {'form': form})
     # if a GET (or any other method) we'll create a blank form
@@ -54,7 +60,7 @@ def authorize(request):
             request.session.modified = True
         return redirect('/licensing')        
     except BaseUser.DoesNotExist:
-        messages.add_message(request, messages.ERROR, 'Wrong Check-In code or email. Member Does Not exist')
+        messages.add_message(request, messages.ERROR, 'Wrong Check-In code or email. Account Does Not exist')
         return redirect('/licensing/login')    
 
 def logout(request):
