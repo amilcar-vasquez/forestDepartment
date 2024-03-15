@@ -97,7 +97,8 @@ def signup(request):
             if new_user != False:
                 messages.add_message(request, messages.SUCCESS, 'Signup Successful')
                 return HttpResponseRedirect('/licensing/login')
-        return render(request, 'licensing/signup.html', {'form': form})
+            messages.add_message(request, messages.INFO, 'Something went wrong. Please try again.')
+            return render(request, 'licensing/signup.html', {'form': form})
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ProfileForm()

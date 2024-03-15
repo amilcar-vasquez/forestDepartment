@@ -22,7 +22,7 @@ def forgot_code(email, request):
 
 def add_profile(form, request):
 	try:
-		user = user_create(email=form.cleaned_data['email'])
+		user = user_create(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
 		if user:
 			profile = form.save()
 			profile.user = user

@@ -76,8 +76,8 @@ class Species(models.Model):
         return self.scientific_name
 
 class Profile(models.Model):
-    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=100, blank=True, null=True)
