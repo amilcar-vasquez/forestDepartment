@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Little Brother Brewing Run Club - Dashboard</title>
+    <title>Forestry Licensing - Create Account</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -36,10 +36,10 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <!--<img src="{% static 'img/logo3.png' %}" alt="..."> -->
+                                <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form action="/members/signup" method="POST" class="user">
+                            <form action="/licensing/signup" method="POST" class="user">
                                 {% csrf_token %}
                                 {% if messages %}
                                     {% for message in messages %}
@@ -70,46 +70,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <span class="card bg-danger text-white shadow">{{ form.check_in_code.errors }}</span> 
-                                       {{ form.check_in_code|placeholder:'Check-In Code' }}
+                                       <span class="card bg-danger text-white shadow">{{ form.password.errors }}</span> 
+                                       {{ form.password|placeholder:'Password' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.confirm_code.errors }}
-                                        {{ form.confirm_code|placeholder:'Repeat Check-In Code' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.gender.errors }}
-                                       {{ form.gender|placeholder:'Gender' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form.phone_number.errors }}
-                                        {{ form.phone_number|placeholder:'Phone Number' }}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    {{ form.address.errors }}
-                                    {{ form.address|placeholder:'Address' }}
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.city.errors }}
-                                       {{ form.city|placeholder:'City' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form.zip_postal_code.errors }}
-                                        {{ form.zip_postal_code|placeholder:'Zip' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.state.errors }}
-                                       {{ form.state|placeholder:'State' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form.referral.errors }}
-                                        {{ form.referral|placeholder:'Refferal' }}
+                                        {{ form.confirm_password.errors }}
+                                        {{ form.confirm_password|placeholder:'Repeat Password' }}
                                     </div>
                                 </div>
                                
@@ -117,10 +83,10 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="/members/forgot">Forgot Code?</a>
+                                <a class="small" href="/licensing/forgot">Forgot Code?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="/members/login">Already have an account? Login!</a>
+                                <a class="small" href="/licensing/login">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

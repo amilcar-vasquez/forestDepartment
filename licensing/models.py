@@ -74,3 +74,13 @@ class Species(models.Model):
 
     def __str__(self):
         return self.scientific_name
+
+class Profile(models.Model):
+    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name

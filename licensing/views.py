@@ -6,14 +6,18 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from .models import Application
-from .forms import ApplicationForm, ForgotForm
-from .services import add_application, forgot_code
+from .forms import ApplicationForm, ForgotForm, ProfileForm
+from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
 
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'licensing/index.html')
+        Applications = Application.objects.filter(user=request.user)
+        completed = Applications.filter(approval='Approved').count()
+        count = Applications.count()
+        context = {'applications': Applications,'completed': completed, 'count': count}
+        return render(request, 'licensing/index.html', context)
     return redirect('/licensing/login')
     
 
@@ -81,7 +85,23 @@ def qr(request, id):
 
 def signup(request):
     # if this is a POST request we need to process the form data
-    return render(request, 'members/signup.html')
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProfileForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:            
+            new_user = add_profile(form, request)
+            if new_user != False:
+                messages.add_message(request, messages.SUCCESS, 'Signup Successful')
+                return HttpResponseRedirect('/licensing/login')
+        return render(request, 'licensing/signup.html', {'form': form})
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProfileForm()
+    return render(request, 'licensing/signup.html', {'form': form})
 
 def profile(request):
     return render(request, 'members/profile.html')

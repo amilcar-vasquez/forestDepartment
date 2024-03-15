@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import Application
+from .models import Application, Profile
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -38,3 +38,25 @@ class ForgotForm(forms.Form):
 		#except Member.DoesNotExist:
 		#	# A user was found with this as a username, raise an error.
 		#	raise forms.ValidationError('This email address does not exist.')
+
+class ProfileForm(ModelForm):
+	password = forms.CharField(widget=forms.PasswordInput())
+	confirm_password = forms.CharField(widget=forms.PasswordInput())
+	email = forms.EmailField(label='Your Email')
+
+	class Meta:
+		model = Profile
+		fields = ['first_name', 'last_name', 'phone_number', 'photo']
+		
+	def __init__(self, *args, **kwargs):
+		super(ProfileForm, self).__init__(*args, **kwargs)
+		for field in self.fields:
+			self.fields[field].widget.attrs['class'] = 'form-control'
+
+	def clean(self):
+		cleaned_data = super().clean()
+		code = cleaned_data.get('password')
+		confirm = cleaned_data.get('confirm_password')
+
+		if confirm != code:
+			raise ValidationError("Password do not match")

@@ -20,3 +20,14 @@ def forgot_code(email, request):
 
 	send_mail('New Check-In Code', 'Your new check-in code is: ' + str(code), 'jashua@savageroasters.com',[email])
 
+def add_profile(form, request):
+	try:
+		user = user_create(email=form.cleaned_data['email'])
+		if user:
+			profile = form.save()
+			profile.user = user
+			profile.save()
+	except ValidationError:
+		messages.add_message(request,messages.ERROR, 'User with this Email address already exists')
+		return False
+
