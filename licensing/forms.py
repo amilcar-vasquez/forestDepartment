@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import Application, Profile
+from .models import Application, Profile, Lumber
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -8,7 +8,7 @@ class ApplicationForm(ModelForm):
 	class Meta:
 		model = Application
 		fields = ['type', 'importer_name', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
-			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 'description_of_goods'
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 
 			]
 		
 	def __init__(self, *args, **kwargs):
@@ -16,13 +16,15 @@ class ApplicationForm(ModelForm):
 		for field in self.fields:
 			self.fields[field].widget.attrs['class'] = 'form-control'
 
-	def clean(self):
-		cleaned_data = super().clean()
-		code = cleaned_data.get('check_in_code')
-		confirm = cleaned_data.get('confirm_code')
-
-		if confirm != code:
-			raise ValidationError("Check in Code do not match")
+class LumberForm(ModelForm):
+	class Meta:
+		model = Lumber
+		fields = ['local_name', 'scientific_name', 'quantity', 'grade', 'value', 'remarks']
+		
+	def __init__(self, *args, **kwargs):
+		super(LumberForm, self).__init__(*args, **kwargs)
+		for field in self.fields:
+			self.fields[field].widget.attrs['class'] = 'form-control'
 
 class ForgotForm(forms.Form):
 	email = forms.EmailField(label = 'Your Email')

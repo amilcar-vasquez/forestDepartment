@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from .models import Application
-from .forms import ApplicationForm, ForgotForm, ProfileForm
+from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm
 from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
 
@@ -30,6 +30,7 @@ def application(request):
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
         form = ApplicationForm(request.POST)
+        form2 = LumberForm(request.POST)
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
@@ -38,11 +39,12 @@ def application(request):
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/login')
-            return render(request, 'licensing/application.html', {'form': form})
+            return render(request, 'licensing/application.html', {'form': form, 'form2': form2})
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ApplicationForm()
-    return render(request, 'licensing/application.html', {'form': form})
+        form2 = LumberForm()
+    return render(request, 'licensing/application.html', {'form': form, 'form2': form2})
 
 def login(request):
     if request.user.is_authenticated:

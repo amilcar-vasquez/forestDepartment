@@ -46,7 +46,8 @@ class Application(models.Model):
     port_of_entry = models.CharField(max_length=100)
     port_of_exit = models.CharField(max_length=100)
     treatment = models.CharField(max_length=100, choices=TREATMENT_CHOICES)
-    description_of_goods = models.ManyToManyField('Goods', through='Species', blank=True, null=True)
+    lumber_details = models.ManyToManyField('Lumber', blank=True)
+    species_details = models.ManyToManyField('Species', blank=True)
     date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)
     date_expires = models.DateField(blank=True, null=True)
@@ -57,15 +58,8 @@ class Application(models.Model):
     def __str__(self):
         return self.importer_name
     
-class Goods(models.Model):
+class Lumber(models.Model):
     local_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.local_name
-    
-class Species(models.Model):
-    application = models.ForeignKey(Application, on_delete=models.CASCADE, blank=True, null=True)
-    goods = models.ForeignKey(Goods, on_delete=models.CASCADE)
     scientific_name = models.CharField(max_length=100)
     quantity = models.IntegerField(default=1)    
     grade = models.CharField(max_length=100, blank=True, null=True)
@@ -74,6 +68,47 @@ class Species(models.Model):
 
     def __str__(self):
         return self.scientific_name
+    
+class Species(models.Model):
+    CITES_CHOICES = (
+        ('Appendix I', 'Appendix I'),
+        ('Appendix II', 'Appendix II'),
+        ('Appendix III', 'Appendix III'),
+        ('Not Listed', 'Not Listed'),
+    )
+    CLASS_CHOICES = (
+        ('Research', 'Research'),
+        ('Pet', 'Pet'),
+        ('Other', 'Other'),
+    )
+    name = models.CharField(max_length=100)
+    country_of_origin = models.CharField(max_length=100)
+    CITES_status = models.CharField(max_length=100, choices=CITES_CHOICES)
+    number_of_individuals = models.IntegerField(default=1)
+    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES)
+    identification = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class SpeciesType(models.Model):
+    TYPE_CHOICES = (
+        ('Live Specimen', 'Live Specimen'),
+        ('Plant Sample', 'Plant Sample'),
+        ('Blood Sample', 'Blood Sample'),
+        ('Tissue Sample', 'Tissue Sample'),
+        ('Feather Sample', 'Feather Sample'),
+        ('Swab Sample', 'Swab Sample (Buccal/Skin)'),
+        ('Other', 'Other'),
+    )
+    type = models.CharField(max_length=100, choices=TYPE_CHOICES)
+    species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True, null=True)
+    number_of_individuals = models.IntegerField(default=1)
+    mode_of_storage = models.CharField(max_length=100, blank=True, null=True)
+    tests_to_be_conducted = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.type
 
 class Profile(models.Model):
     user = models.OneToOneField(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
