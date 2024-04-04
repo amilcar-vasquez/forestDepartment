@@ -1,5 +1,6 @@
 from django.db import models
 from styleguide_example.users.models import BaseUser
+from styleguide_example.files.models import File
 from datetime import datetime, date
 
 # Create your models here.
@@ -48,6 +49,7 @@ class Application(models.Model):
     treatment = models.CharField(max_length=100, choices=TREATMENT_CHOICES)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     species_details = models.ManyToManyField('Species', blank=True)
+    files = models.ManyToManyField(File, blank=True)
     date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)
     date_expires = models.DateField(blank=True, null=True)
@@ -59,9 +61,9 @@ class Application(models.Model):
         return self.importer_name
     
 class Lumber(models.Model):
-    local_name = models.CharField(max_length=100)
-    scientific_name = models.CharField(max_length=100)
-    quantity = models.IntegerField(default=1)    
+    local_name = models.CharField(max_length=100, blank=True, null=True)
+    scientific_name = models.CharField(max_length=100, blank=True, null=True)
+    quantity = models.IntegerField(default=1, blank=True, null=True)    
     grade = models.CharField(max_length=100, blank=True, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     remarks = models.CharField(max_length=100, blank=True, null=True)

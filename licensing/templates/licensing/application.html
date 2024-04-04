@@ -168,38 +168,55 @@
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Lumber Details</h2>
+                                    {{ form2.management_form }}
                                 </div>
-                                
+                            {% for lform in form2 %}    
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form2.local_name.errors }}
-                                       {{ form2.local_name|placeholder:'Local Name'}}
+                                       {{ lform.local_name.errors }}
+                                       {{ lform.local_name|placeholder:'Local Name'}}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form2.scientific_name.errors }}
-                                        {{ form2.scientific_name|placeholder:'Scientific Name'}}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form2.quantity.errors }}
-                                       {{ form2.quantity|placeholder:'Quantity' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ form2.grade.errors }}
-                                        {{ form2.grade|placeholder:'Grade' }}
+                                        {{ lform.scientific_name.errors }}
+                                        {{ lform.scientific_name|placeholder:'Scientific Name'}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form2.value.errors }}
-                                       {{ form2.value|placeholder:'Value' }}
+                                       {{ lform.quantity.errors }}
+                                       {{ lform.quantity|placeholder:'Quantity' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form2.remarks.errors }}
-                                        {{ form2.remarks|placeholder:'Remarks' }}
+                                        {{ lform.grade.errors }}
+                                        {{ lform.grade|placeholder:'Grade' }}
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       {{ lform.value.errors }}
+                                       {{ lform.value|placeholder:'Value' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ lform.remarks.errors }}
+                                        {{ lform.remarks|placeholder:'Remarks' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <hr />
+                                </div>
+                            {% endfor %}
+                            <div class="text-center">
+                               
+                                <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
+                                <hr />
+                                {{ files.management_form }}
+                            </div>
+                            {% for file in files %}
+                                <div class="form-group">
+                                    {{ file.file.errors }}
+                                    {{ file.file|placeholder:'File' }}
+                                </div>
+                            {% endfor %}
                                 <input type="submit" value="Apply Now" class="btn btn-primary btn-user btn-block" />     
                             </form>
                             <hr>
