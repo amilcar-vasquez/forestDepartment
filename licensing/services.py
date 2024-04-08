@@ -1,6 +1,7 @@
 from .models import Application
 from django.contrib import messages
 from styleguide_example.users.services import user_create
+from styleguide_example.files.services import FileStandardUploadService
 import random
 from django.core.mail import send_mail
 from django.core.exceptions import ValidationError
@@ -12,16 +13,18 @@ def add_application(form, request, lumber, files):
 		member.user = request.user
 		member.save()
 		for form2 in lumber:
-			if form2.is_valid():
+			if form2.is_valid() and form2['local_name'].value():
 				lumber = form2.save(commit=False)				
 				lumber.save()
 				member.lumber_details.add(lumber)
-		for form3 in files:
-			if form3.is_valid():
-				file = form3.save(commit=False)
-				file.uploaded_by = request.user
-				file.save()
-				member.files.add(file)
+		if files.is_valid():
+			files.save(commit=False)
+			for form3 in files:
+				if form3.is_valid() and form3["file"].value():
+					prefix = form3.prefix
+					service = FileStandardUploadService(file_obj=request.FILES.get('{prefix}-file'.format(prefix=prefix)), user=request.user)
+					file = service.create()
+					member.files.add(file)		
 	except ValidationError:
 		messages.add_message(request,messages.ERROR, 'User with this Email address already exists')
 		return False

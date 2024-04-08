@@ -63,7 +63,7 @@ class Application(models.Model):
 class Lumber(models.Model):
     local_name = models.CharField(max_length=100, blank=True, null=True)
     scientific_name = models.CharField(max_length=100, blank=True, null=True)
-    quantity = models.IntegerField(default=1, blank=True, null=True)    
+    quantity = models.IntegerField(blank=True, null=True)    
     grade = models.CharField(max_length=100, blank=True, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     remarks = models.CharField(max_length=100, blank=True, null=True)

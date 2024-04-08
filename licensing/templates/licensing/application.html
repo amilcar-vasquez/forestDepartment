@@ -39,7 +39,7 @@
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
                                 <h1 class="h4 text-gray-900 mb-4">New Application</h1>
                             </div>
-                            <form action="/licensing/application" method="POST" class="user">
+                            <form action="/licensing/application" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
                                 {% if messages %}
                                     {% for message in messages %}
@@ -210,6 +210,9 @@
                                 <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
                                 <hr />
                                 {{ files.management_form }}
+                                {% for hidden in files.hidden_fields %}
+                                        {{hidden}}
+                                {% endfor %}
                             </div>
                             {% for file in files %}
                                 <div class="form-group">
