@@ -172,7 +172,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [],
 }
 
-APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
+APP_DOMAIN = env("APP_DOMAIN", default="http://64.23.128.4:8001/")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -185,7 +185,7 @@ PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/members'
+PWA_APP_START_URL = '/licensing'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
     {
