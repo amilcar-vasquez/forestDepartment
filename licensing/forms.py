@@ -45,6 +45,7 @@ class ForgotForm(forms.Form):
 class ProfileForm(ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput(), required=False)
 	confirm_password = forms.CharField(widget=forms.PasswordInput(), required=False, label='Confirm Password')
+	email = forms.EmailField(widget=forms.EmailInput(), required=False, label='Email Address')
 
 	class Meta:
 		model = Profile
