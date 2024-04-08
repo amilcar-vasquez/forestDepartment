@@ -43,9 +43,8 @@ class ForgotForm(forms.Form):
 		#	raise forms.ValidationError('This email address does not exist.')
 
 class ProfileForm(ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
-	confirm_password = forms.CharField(widget=forms.PasswordInput())
-	email = forms.EmailField(label='Your Email')
+	password = forms.CharField(widget=forms.PasswordInput(), required=False)
+	confirm_password = forms.CharField(widget=forms.PasswordInput(), required=False, label='Confirm Password')
 
 	class Meta:
 		model = Profile

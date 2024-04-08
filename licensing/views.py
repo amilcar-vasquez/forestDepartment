@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.forms import formset_factory, modelformset_factory
 
-from .models import Application
+from .models import Application, Profile
 from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm
 from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
@@ -18,7 +18,8 @@ def index(request):
         Applications = Application.objects.filter(user=request.user)
         completed = Applications.filter(approval='Approved').count()
         count = Applications.count()
-        context = {'applications': Applications,'completed': completed, 'count': count}
+        profile = Profile.objects.get(user=request.user)
+        context = {'applications': Applications,'completed': completed, 'count': count, 'profile': profile}
         return render(request, 'licensing/index.html', context)
     return redirect('/licensing/login')
     
@@ -63,6 +64,17 @@ def lumberapplication(request):
         lumber = LumberFormset(lumber_data, prefix='lumber')
         files = FilesFormset(files_data, prefix='files')
     return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files})
+
+def view(request, id):
+    context = {}
+    if id is not None:
+        try:
+            run = Application.objects.get(id=id)
+            context = {'application': run}
+        except Application.DoesNotExist:
+            messages.add_message(request, messages.ERROR, 'Application with this ID Does not exist.')
+    template = loader.get_template('licensing/view.html')    
+    return HttpResponse(template.render(context, request))
 
 def login(request):
     if request.user.is_authenticated:
@@ -125,7 +137,27 @@ def signup(request):
     return render(request, 'licensing/signup.html', {'form': form})
 
 def profile(request):
-    return render(request, 'members/profile.html')
+    # if this is a POST request we need to process the form data
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            profile = form.save()
+            messages.add_message(request, messages.SUCCESS, 'Profile updated')
+            return HttpResponseRedirect('/licensing')
+        messages.add_message(request, messages.INFO, 'Something went wrong. Please try again.')
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'licensing/profile.html', {'form': form, 'profile': profile})
 
 def coupons(request):
     if request.user.is_authenticated:

@@ -1,0 +1,180 @@
+{% include "base_generic.html" %}
+{% load static %}
+{% load myfilters %}
+                 <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Profile</h1>
+                    <p class="mb-4">Your profile information.</p>
+                     <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Update Account!</h1>
+                                <small>To update password, both password fields must match.</small>
+                            </div>
+                            <form action="/licensing/profile" method="POST" enctype="multipart/form-data" class="user">
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.errors }}
+                                    </div>
+                                {% endif %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="col-lg-12 mb-4">
+                                    <div class="card bg-{{message.tags}} text-white shadow">
+                                        <div class="card-body">
+                                        {{ message }}
+                                        </div>
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
+                                <br />
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {% if profile.photo %}
+                                        <img src="{{ profile.photo.url }}" class="img-fluid" width="200px" alt="Responsive image">  
+                                        {% else %}
+                                        <img src="{% static 'img/undraw_profile.svg' %}" class="img-fluid" width="200px" alt="Responsive image">  
+                                        {% endif %}                                      
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.photo.errors }}
+                                        {{ form.photo }}    
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {{ form.first_name.errors }}
+                                        {{ form.first_name }}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.last_name.errors }}
+                                        {{ form.last_name }}    
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.phone_number.errors }}
+                                    {{ form.phone_number }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {{ form.password.errors }}
+                                        {{ form.password|placeholder:"Password" }}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.confirm_password.errors }}
+                                        {{ form.confirm_password|placeholder:"Confirm Password" }}    
+                                    </div>
+                                </div>
+                               
+                                <input type="submit" value="Update" class="btn btn-primary btn-user btn-block" />     
+                            </form>
+                            
+                        </div>
+                    
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Little Brother Brewing Run Club</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/licensing/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Coupon Modal-->
+    <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm Coupon</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Confirm" below if you are ready to redeem Coupon #: <br />
+                    <center><span id="coupon_code" class='btn btn-primary btn-lg text'> {{ current_coupon }} </span> </center>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/members/redeem" id="coupon-confirm">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+    <script type="text/javascript">
+        $( "#redeem" ).click(function(e) {
+            e.preventDefault();
+
+            var data = $(this).data('coupon');
+            var id = $(this).data('couponid');
+            $("#coupon-confirm").attr('href', '/members/redeem/' + id);
+            var href = $("#coupon-confirm").attr('href');
+            $('#coupon_code').html(data);
+            console.log(data);
+            console.log(href);
+        });
+    </script>
+
+</body>
+
+</html>

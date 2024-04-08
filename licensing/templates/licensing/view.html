@@ -37,18 +37,9 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
-                                <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
+                                <h1 class="h4 text-gray-900 mb-4">View Application #{{ application.id }} for: {{ application.importer_name }} </h1>
+                                <h2>Application Status: {{ application.approval }}</h2>
                             </div>
-                            <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
-                                {% csrf_token %}
-                                {% for hidden in form.hidden_fields %}
-                                    {{hidden}}
-                                {% endfor %}
-                                {% if form.errors %}
-                                    <div class="alert alert-danger">
-                                        {{ form.errors }}
-                                    </div>
-                                {% endif %}
                                 {% if messages %}
                                     {% for message in messages %}
                                     <div class="col-lg-12 mb-4">
@@ -64,54 +55,54 @@
                                 <br />
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        {{ form.type.errors }}
-                                        {{ form.type|placeholder:'Application Type'}}                                        
+                                        <b>Type: </b><br />
+                                        {{ application.type }}                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.importer_name.errors }}
-                                        {{ form.importer_name|placeholder:'Importer Name'}}    
+                                        <b>Importer Name: </b><br />
+                                        {{ application.importer_name }}    
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    {{ form.importer_email.errors }}
-                                    {{ form.importer_email|placeholder:'Importer Email' }}
+                                    <b>Importer Email: </b><br />
+                                    {{ application.importer_email }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form.importer_social.errors }}
-                                    {{ form.importer_social|placeholder:'Importer Social Security #' }}
+                                    <b>Importer Social Security Number: </b><br />
+                                    {{ application.importer_social }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        {{ form.importer_phone.errors }}
-                                        {{ form.importer_phone|placeholder:'Phone Number' }}
+                                     <b>Importer Phone: </b> <br />
+                                      {{ application.importer_phone }}                                
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.importer_business_number.errors }}
-                                        {{ form.importer_business_number|placeholder:'Business Number' }}
+                                      <b>Importer Business Number:</b> <br />
+                                       {{ application.business_number }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    {{ form.importer_address.errors }}
-                                    {{ form.importer_address|placeholder:'Address' }}
+                                   <b>Importer Address:</b><br />
+                                      {{ application.importer_address }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.importer_city.errors }}
-                                       {{ form.importer_city|placeholder:'City' }}
+                                        <b>Importer City:</b><br />
+                                        {{ application.importer_city }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.importer_zip.errors }}
-                                        {{ form.importer_zip|placeholder:'Zip' }}
+                                       <b>Importer Zip:</b> <br />
+                                        {{ application.importer_zip }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.importer_state.errors }}
-                                       {{ form.importer_state|placeholder:'State' }}
+                                        <b>Importer State:</b><br />
+                                        {{ application.importer_state }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.importer_country.errors }}
-                                        {{ form.importer_country|placeholder:'Country' }}
+                                        <b>Importer Country:</b><br />
+                                        {{ application.importer_country }}
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -119,31 +110,31 @@
                                     <h2 class="h5 text-gray-900 mb-4">Exporter Info</h2>
                                 </div>
                                 <div class="form-group">
-                                    {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'Exporter Name' }}
+                                    <b>Exporter Name: </b><br />
+                                    {{ application.exporter_name }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form.exporter_address.errors }}
-                                    {{ form.exporter_address|placeholder:'Address' }}
+                                   <b>Exporter Address:</b><br />
+                                      {{ application.exporter_address }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.exporter_city.errors }}
-                                       {{ form.exporter_city|placeholder:'City' }}
+                                        <b>Exporter City:</b><br />
+                                        {{ application.exporter_city }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.exporter_zip.errors }}
-                                        {{ form.exporter_zip|placeholder:'Zip' }}
+                                        <b>Exporter Zip:</b><br />
+                                        {{ application.exporter_zip }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.exporter_state.errors }}
-                                       {{ form.exporter_state|placeholder:'State' }}
+                                        <b>Exporter State:</b><br />
+                                        {{ application.exporter_state }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.exporter_country.errors }}
-                                        {{ form.exporter_country|placeholder:'Country' }}
+                                        <b>Exporter Country:</b><br />
+                                        {{ application.exporter_country }}
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -151,85 +142,81 @@
                                     <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
                                 </div>
                                 <div class="form-group">
-                                    {{ form.mode_of_transport.errors }}
-                                    {{ form.mode_of_transport|placeholder:'Mode of Transport' }}
+                                    <b>Mode of Transport: </b><br />
+                                    {{ application.mode_of_transport }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.port_of_entry.errors }}
-                                       {{ form.port_of_entry|placeholder:'Entry Port' }}
+                                     <b>Port of Entry: </b> <br />
+                                      {{ application.port_of_entry }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.port_of_exit.errors }}
-                                        {{ form.port_of_exit|placeholder:'Exit Port' }}
+                                        <b>Port of Exit:</b><br />
+                                        {{ application.port_of_exit }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.treatment.errors }}
-                                       {{ form.treatment|placeholder:'Treatment' }}
+                                      <b>Treatment:</b><br />
+                                        {{ application.treatment }}
                                     </div>
                                     <div class="col-sm-6">
                                       
                                     </div>
                                 </div>
+                            {% if application.goods == 'Lumber' %}
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Lumber Details</h2>
-                                    {{ form2.management_form }}
                                 </div>
-                            {% for lform in form2 %}    
+                            {% for lumber in application.lumber_details.all %}    
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ lform.local_name.errors }}
-                                       {{ lform.local_name|placeholder:'Local Name'}}
+                                     <b>Local Name:</b> <br />  
+                                      {{ lumber.local_name }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ lform.scientific_name.errors }}
-                                        {{ lform.scientific_name|placeholder:'Scientific Name'}}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ lform.quantity.errors }}
-                                       {{ lform.quantity|placeholder:'Quantity' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        {{ lform.grade.errors }}
-                                        {{ lform.grade|placeholder:'Grade' }}
+                                        <b>Scientific Name:</b><br />
+                                        {{ lumber.scientific_name }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ lform.value.errors }}
-                                       {{ lform.value|placeholder:'Value' }}
+                                        <b>Quantity: </b><br />
+                                        {{ lumber.quantity }}
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ lform.remarks.errors }}
-                                        {{ lform.remarks|placeholder:'Remarks' }}
+                                      <b>Grade:</b> <br />
+                                       {{ lumber.grade }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                      <b> Value: </b><br />
+                                       {{ lumber.value }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Remarks:</b><br />
+                                        {{ lumber.remarks }}
                                     </div>
                                 </div>
                                 <div class="text-center">
                                     <hr />
                                 </div>
                             {% endfor %}
+                            {% endif %}
+                            {% if application.files.all %}
                             <div class="text-center">
                                
                                 <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
                                 <hr />
-                                {{ files.management_form }}
-                                {% for hidden in files.hidden_fields %}
-                                        {{hidden}}
-                                {% endfor %}
                             </div>
-                            {% for file in files %}
+                            {% for file in application.files.all %}
                                 <div class="form-group">
-                                    {{ file.file.errors }}
-                                    {{ file.file|placeholder:'File' }}
+                                  <a href="{{ file.url }}" target="_blank">{{ file.file }}</a> 
                                 </div>
                             {% endfor %}
-                                <input type="submit" value="Apply Now" class="btn btn-primary btn-user btn-block" />     
-                            </form>
+                            {% endif %}
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="/licensing/forgot">Forgot Code?</a>
