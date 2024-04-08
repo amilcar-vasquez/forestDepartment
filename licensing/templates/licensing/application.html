@@ -37,10 +37,13 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
-                                <h1 class="h4 text-gray-900 mb-4">New Application</h1>
+                                <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
                             </div>
-                            <form action="/licensing/application" method="POST" enctype="multipart/form-data" class="user">
+                            <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{hidden}}
+                                {% endfor %}
                                 {% if messages %}
                                     {% for message in messages %}
                                     <div class="col-lg-12 mb-4">

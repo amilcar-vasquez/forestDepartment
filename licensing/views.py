@@ -23,7 +23,7 @@ def index(request):
     return redirect('/licensing/login')
     
 
-def application(request):
+def lumberapplication(request):
     # if this is a POST request we need to process the form data
     if request.user.is_authenticated == False:
         messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')

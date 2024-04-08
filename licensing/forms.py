@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class ApplicationForm(ModelForm):
+	goods = forms.CharField(widget=forms.HiddenInput(), initial='Lumber')
 
 	class Meta:
 		model = Application

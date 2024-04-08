@@ -64,7 +64,23 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="/licensing/application" class="btn btn-primary">New Application</a>                                          
+                                            <a href="/licensing/lumberapplication" class="btn btn-primary">New Lumber Application</a>                                      
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-table fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <a href="/licensing/speciesapplication" class="btn btn-primary">New Wildlife Application</a>                                         
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
@@ -128,7 +144,7 @@
                                     {% for application in applications %}
                                         <tr>
                                             <td>
-                                                {% if application.approval == 'Not Approved' %}
+                                                {% if application.approval == 'In Review' %}
                                                 <a href="#" data-toggle="modal" data-target="#couponModal" class="btn btn-info" data-couponid="{{ application.id }}" data-coupon="{{ coupon.code }}" id="redeem"> {{ application.id }} </a>
                                                 {% else %}
                                                     <button class="btn btn-info disabled" data-couponid="{{ application.id }}" data-coupon="{{ coupon.code }}" id="redeemed"> Completed </button>

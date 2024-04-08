@@ -6,8 +6,14 @@ from datetime import datetime, date
 # Create your models here.
 class Application(models.Model):
     TYPE_CHOICES = (
+        ('Import', 'Import'),
+        ('Export', 'Export'),
+    )
+    GOODS_CHOICES = (
         ('Lumber', 'Lumber/Lumber Products'),
         ('Wildlife', 'Wildlife/Animals'),
+        ('Plants', 'Plants/Plant Products'),
+        ('Other', 'Other'),
     )
     TRANSPORT_CHOICES = (
         ('Air', 'Air'),
@@ -25,8 +31,10 @@ class Application(models.Model):
         ('Approved', 'Approved'),
         ('Conditional', 'Approved with Conditions'),
         ('Not Approved', 'Not Approved'),
+        ('In Review', 'In Review'),
     )
-    type = models.CharField(max_length=100, choices=TYPE_CHOICES)   
+    type = models.CharField(max_length=100, choices=TYPE_CHOICES)
+    goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
     importer_address = models.CharField(max_length=100)
     importer_city = models.CharField(max_length=100)
@@ -54,7 +62,7 @@ class Application(models.Model):
     date_approved = models.DateField(blank=True, null=True)
     date_expires = models.DateField(blank=True, null=True)
     packaging_list_approved = models.BooleanField(default=False)
-    approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True, default='Not Approved')
+    approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True, default='In Review')
     user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):

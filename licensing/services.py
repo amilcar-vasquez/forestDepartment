@@ -10,6 +10,7 @@ from datetime import datetime, date
 def add_application(form, request, lumber, files):
 	try:		
 		member = form.save()
+		member.goods = form.cleaned_data['goods']
 		member.user = request.user
 		member.save()
 		for form2 in lumber:
