@@ -174,6 +174,8 @@ REST_FRAMEWORK = {
 
 APP_DOMAIN = env("APP_DOMAIN", default="https://license.forest.gov.bz")
 
+CSRF_TRUSTED_ORIGINS = ['https://license.forest.gov.bz']
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "static/js", "serviceworker.js")
