@@ -145,7 +145,7 @@
                                         <tr>
                                             <td>
                                                 {% if application.approval == 'In Review' %}
-                                                <a href="#" data-toggle="modal" data-target="#couponModal" class="btn btn-info" data-couponid="{{ application.id }}" data-coupon="{{ application.id }}" id="redeem"> {{ application.id }} </a>
+                                                <a href="#" data-toggle="modal" data-target="#couponModal" class="btn btn-info redeem" data-couponid="{{ application.id }}" data-coupon="{{ application.id }}"> {{ application.id }} </a>
                                                 {% else %}
                                                     <button class="btn btn-info disabled" data-couponid="{{ application.id }}" data-coupon="{{ application.id }}" id="redeemed"> Completed </button>
                                                 {% endif %}
@@ -294,7 +294,7 @@
     <!-- Page level plugins -->
     <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
     <script type="text/javascript">
-        $( "#redeem" ).click(function(e) {
+        $( ".redeem" ).click(function(e) {
             e.preventDefault();
 
             var data = $(this).data('coupon');
