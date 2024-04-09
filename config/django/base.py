@@ -172,7 +172,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [],
 }
 
-APP_DOMAIN = env("APP_DOMAIN", default="http://64.23.128.4:8001/")
+APP_DOMAIN = env("APP_DOMAIN", default="https://license.forest.gov.bz")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
