@@ -26,6 +26,7 @@ def add_application(form, request, lumber, files):
 					service = FileStandardUploadService(file_obj=request.FILES.get('{prefix}-file'.format(prefix=prefix)), user=request.user)
 					file = service.create()
 					member.files.add(file)		
+		return member
 	except ValidationError:
 		messages.add_message(request,messages.ERROR, 'User with this Email address already exists')
 		return False

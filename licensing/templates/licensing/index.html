@@ -131,6 +131,7 @@
                                             <th>Application ID</th>
                                             <th>Date</th>
                                             <th>Status</th>
+                                            <th>QR</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -138,6 +139,7 @@
                                             <th>Application ID</th>
                                             <th>Date</th>
                                             <th>Status</th>
+                                            <th>QR</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -152,6 +154,7 @@
                                             </td>
                                             <td>{{ application.date_received}}</td>                                           
                                             <td>{{ application.approval }}</td>
+                                            <td><a href="/licensing/qr/{{ application.id }}" target="_blank">View QR Code</a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

@@ -44,7 +44,7 @@ def lumberapplication(request):
             new_application = add_application(form, request, lumber, files)
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
-                return HttpResponseRedirect('/licensing/login')
+                return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
             return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files})
     # if a GET (or any other method) we'll create a blank form
     else:
