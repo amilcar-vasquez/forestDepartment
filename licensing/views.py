@@ -49,7 +49,7 @@ def lumberapplication(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         lumber_data = {
-            'lumber-TOTAL_FORMS': '3',
+            'lumber-TOTAL_FORMS': '5',
             'lumber-INITIAL_FORMS': '0',
             'lumber-MIN_NUM_FORMS': '0',
             'lumber-MAX_NUM_FORMS': '1000',

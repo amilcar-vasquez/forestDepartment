@@ -8,6 +8,7 @@ class Application(models.Model):
     TYPE_CHOICES = (
         ('Import', 'Import'),
         ('Export', 'Export'),
+        ('Re-export', 'Re-export'),
     )
     GOODS_CHOICES = (
         ('Lumber', 'Lumber/Lumber Products'),
@@ -26,6 +27,7 @@ class Application(models.Model):
         ('Chemical', 'Chemical'),
         ('Air Dry', 'Air Dry'),
         ('None', 'None'),
+        ('Other', 'Other'),
     )
     APPROVAL_CHOICES = (
         ('Approved', 'Approved'),
@@ -36,6 +38,8 @@ class Application(models.Model):
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
+    importer_company_name = models.CharField(max_length=100, blank=True, null=True)
+    company_registry_number = models.CharField(max_length=100, blank=True, null=True)
     importer_address = models.CharField(max_length=100)
     importer_city = models.CharField(max_length=100)
     importer_state = models.CharField(max_length=100)

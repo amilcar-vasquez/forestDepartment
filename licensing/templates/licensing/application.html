@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
     <div class="container">
 
@@ -38,6 +38,8 @@
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
                                 <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
+                                <small>All fields with an * are required fields. </small>
+                                <hr />
                             </div>
                             <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
@@ -62,88 +64,105 @@
                                 {% endif %}
                                 <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
                                 <br />
+                                <div class="text-center">
+                                   
+                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
+                                    <hr />
+                                </div>
+                                <div class="form-group">
+                                    <label>License Type *:</label>
+                                    {{ form.type.errors }}
+                                    {{ form.type|placeholder:'Application Type'}}             
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        {{ form.type.errors }}
-                                        {{ form.type|placeholder:'Application Type'}}                                        
+                                        {{ form.importer_name.errors }}
+                                        {{ form.importer_name|placeholder:'Importer Name *'}}                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        {{ form.importer_name.errors }}
-                                        {{ form.importer_name|placeholder:'Importer Name'}}    
+                                        {{ form.importer_company_name.errors }}
+                                        {{ form.importer_company_name|placeholder:'Company Name' }}   
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    {{ form.importer_email.errors }}
-                                    {{ form.importer_email|placeholder:'Importer Email' }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form.importer_social.errors }}
-                                    {{ form.importer_social|placeholder:'Importer Social Security #' }}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {{ form.importer_email.errors }}
+                                        {{ form.importer_email|placeholder:'Importer Email *' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.importer_social.errors }}
+                                        {{ form.importer_social|placeholder:'Importer Social Security Number *' }}
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         {{ form.importer_phone.errors }}
-                                        {{ form.importer_phone|placeholder:'Phone Number' }}
+                                        {{ form.importer_phone|placeholder:'Phone Number *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.importer_business_number.errors }}
-                                        {{ form.importer_business_number|placeholder:'Business Number' }}
+                                        {{ form.importer_business_number|placeholder:'Business Number *' }}
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label>Company Registry #</label>
+                                    {{ form.company_registry_number.errors }}
+                                    {{ form.company_registry_number|placeholder:'Company Registry Number *' }}
+                                </div>
+                                <div class="form-group">
                                     {{ form.importer_address.errors }}
-                                    {{ form.importer_address|placeholder:'Address' }}
+                                    {{ form.importer_address|placeholder:'Address *' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ form.importer_city.errors }}
-                                       {{ form.importer_city|placeholder:'City' }}
+                                       {{ form.importer_city|placeholder:'City *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.importer_zip.errors }}
-                                        {{ form.importer_zip|placeholder:'Zip' }}
+                                        {{ form.importer_zip|placeholder:'Zip *' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ form.importer_state.errors }}
-                                       {{ form.importer_state|placeholder:'State' }}
+                                       {{ form.importer_state|placeholder:'State *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.importer_country.errors }}
-                                        {{ form.importer_country|placeholder:'Country' }}
+                                        {{ form.importer_country|placeholder:'Country *' }}
                                     </div>
                                 </div>
                                 <div class="text-center">
                                     <hr />
-                                    <h2 class="h5 text-gray-900 mb-4">Exporter Info</h2>
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
                                 </div>
                                 <div class="form-group">
                                     {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'Exporter Name' }}
+                                    {{ form.exporter_name|placeholder:'Exporter Name *' }}
                                 </div>
                                 <div class="form-group">
                                     {{ form.exporter_address.errors }}
-                                    {{ form.exporter_address|placeholder:'Address' }}
+                                    {{ form.exporter_address|placeholder:'Address *' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ form.exporter_city.errors }}
-                                       {{ form.exporter_city|placeholder:'City' }}
+                                       {{ form.exporter_city|placeholder:'City *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.exporter_zip.errors }}
-                                        {{ form.exporter_zip|placeholder:'Zip' }}
+                                        {{ form.exporter_zip|placeholder:'Zip *' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ form.exporter_state.errors }}
-                                       {{ form.exporter_state|placeholder:'State' }}
+                                       {{ form.exporter_state|placeholder:'State *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.exporter_country.errors }}
-                                        {{ form.exporter_country|placeholder:'Country' }}
+                                        {{ form.exporter_country|placeholder:'Country *' }}
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -151,27 +170,24 @@
                                     <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
                                 </div>
                                 <div class="form-group">
+                                    <label>Mode of Transport</label><br />
                                     {{ form.mode_of_transport.errors }}
-                                    {{ form.mode_of_transport|placeholder:'Mode of Transport' }}
+                                    {{ form.mode_of_transport|placeholder:'Mode of Transport *' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ form.port_of_entry.errors }}
-                                       {{ form.port_of_entry|placeholder:'Entry Port' }}
+                                       {{ form.port_of_entry|placeholder:'Entry Port *' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ form.port_of_exit.errors }}
-                                        {{ form.port_of_exit|placeholder:'Exit Port' }}
+                                        {{ form.port_of_exit|placeholder:'Exit Port *' }}
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       {{ form.treatment.errors }}
-                                       {{ form.treatment|placeholder:'Treatment' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                      
-                                    </div>
+                                <div class="form-group">
+                                    <label>Treatment Type</label><br />
+                                    {{ form.treatment.errors }}
+                                    {{ form.treatment|placeholder:'Treatment *' }}
                                 </div>
                                 <div class="text-center">
                                     <hr />
@@ -192,7 +208,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ lform.quantity.errors }}
-                                       {{ lform.quantity|placeholder:'Quantity' }}
+                                       {{ lform.quantity|placeholder:'Quantity (BDFT)' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ lform.grade.errors }}
@@ -202,7 +218,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                        {{ lform.value.errors }}
-                                       {{ lform.value|placeholder:'Value' }}
+                                       {{ lform.value|placeholder:'Value (BZD)' }}
                                     </div>
                                     <div class="col-sm-6">
                                         {{ lform.remarks.errors }}
@@ -213,6 +229,12 @@
                                     <hr />
                                 </div>
                             {% endfor %}
+                            <div class="text-center">
+                                <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
+                                <hr />
+                            </div>
+                            
+
                             <div class="text-center">
                                
                                 <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
@@ -228,6 +250,15 @@
                                     {{ file.file|placeholder:'File' }}
                                 </div>
                             {% endfor %}
+                            <div class="text-center">
+                                <hr />
+                                <small>
+                                    <b>Disclaimer:</b>
+                                    Submitting this application form does not guarantee approval of application. All information provided in this application form is confidential and will only be used for the purpose of vetting the application. Other details and/or
+documents may be requested during the vetting process. If at any point during the vetting process it is found that information provided is false it will result in the application not being considered for the granting of a permit.
+                                </small>
+                                <hr />
+                            </div>
                                 <input type="submit" value="Apply Now" class="btn btn-primary btn-user btn-block" />     
                             </form>
                             <hr>
