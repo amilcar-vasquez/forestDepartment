@@ -49,7 +49,7 @@ class ProfileForm(ModelForm):
 
 	class Meta:
 		model = Profile
-		fields = ['first_name', 'last_name', 'phone_number', 'photo']
+		fields = ['first_name', 'last_name', 'phone_number', 'photo', 'profile_type', 'business_document']
 		
 	def __init__(self, *args, **kwargs):
 		super(ProfileForm, self).__init__(*args, **kwargs)

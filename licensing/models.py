@@ -67,6 +67,7 @@ class Application(models.Model):
     date_expires = models.DateField(blank=True, null=True)
     packaging_list_approved = models.BooleanField(default=False)
     approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True, default='In Review')
+    permit_number = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -125,8 +126,14 @@ class SpeciesType(models.Model):
         return self.type
 
 class Profile(models.Model):
+    PROFILE_TYPE_CHOICES = (
+        ('Individual', 'Individual'),
+        ('Business', 'Business'),
+    )
     user = models.OneToOneField(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
+    profile_type = models.CharField(max_length=100, choices=PROFILE_TYPE_CHOICES)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
+    business_document = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=100, blank=True, null=True)
