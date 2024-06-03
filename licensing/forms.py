@@ -9,7 +9,7 @@ class ApplicationForm(ModelForm):
 	class Meta:
 		model = Application
 		fields = ['type', 'importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
-			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 'other_treatment'
 			]
 		
 	def __init__(self, *args, **kwargs):
@@ -49,7 +49,7 @@ class ProfileForm(ModelForm):
 
 	class Meta:
 		model = Profile
-		fields = ['first_name', 'last_name', 'phone_number', 'photo', 'profile_type', 'business_document']
+		fields = ['first_name', 'last_name', 'phone_number', 'photo', 'profile_type', 'business_name', 'business_document']
 		
 	def __init__(self, *args, **kwargs):
 		super(ProfileForm, self).__init__(*args, **kwargs)
@@ -60,6 +60,12 @@ class ProfileForm(ModelForm):
 		cleaned_data = super().clean()
 		code = cleaned_data.get('password')
 		confirm = cleaned_data.get('confirm_password')
+
+		type = cleaned_data.get('profile_type')
+		if type == 'Business':
+			business = cleaned_data.get('business_name')
+			if business == None:
+				raise ValidationError("Please enter a business name")
 
 		if confirm != code:
 			raise ValidationError("Password do not match")

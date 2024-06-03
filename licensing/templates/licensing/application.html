@@ -39,7 +39,6 @@
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
                                 <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
                                 <small>All fields with an * are required fields. </small>
-                                <hr />
                             </div>
                             <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
@@ -76,61 +75,72 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Contact Name *</label>
                                         {{ form.importer_name.errors }}
-                                        {{ form.importer_name|placeholder:'Importer Name *'}}                                        
+                                        {{ form.importer_name|placeholder:''}}                                        
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Company Name * </label>
                                         {{ form.importer_company_name.errors }}
-                                        {{ form.importer_company_name|placeholder:'Company Name' }}   
+                                        {{ form.importer_company_name|placeholder:'' }}   
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Email *</label>
                                         {{ form.importer_email.errors }}
-                                        {{ form.importer_email|placeholder:'Importer Email *' }}
+                                        {{ form.importer_email|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Importer Social Security Number *</label>
                                         {{ form.importer_social.errors }}
-                                        {{ form.importer_social|placeholder:'Importer Social Security Number *' }}
+                                        {{ form.importer_social|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Phone *</label>
                                         {{ form.importer_phone.errors }}
-                                        {{ form.importer_phone|placeholder:'Phone Number *' }}
+                                        {{ form.importer_phone|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Business Phone Number *</label>
                                         {{ form.importer_business_number.errors }}
-                                        {{ form.importer_business_number|placeholder:'Business Number *' }}
+                                        {{ form.importer_business_number|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Company Registry #</label>
+                                    <label>Business Registration Number *</label>
                                     {{ form.company_registry_number.errors }}
-                                    {{ form.company_registry_number|placeholder:'Company Registry Number *' }}
+                                    {{ form.company_registry_number|placeholder:'' }}
                                 </div>
                                 <div class="form-group">
+                                    <label>Address *</label>
                                     {{ form.importer_address.errors }}
-                                    {{ form.importer_address|placeholder:'Address *' }}
+                                    {{ form.importer_address|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
                                        {{ form.importer_city.errors }}
-                                       {{ form.importer_city|placeholder:'City *' }}
+                                       {{ form.importer_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Zip *</label>
                                         {{ form.importer_zip.errors }}
-                                        {{ form.importer_zip|placeholder:'Zip *' }}
+                                        {{ form.importer_zip|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
                                        {{ form.importer_state.errors }}
-                                       {{ form.importer_state|placeholder:'State *' }}
+                                       {{ form.importer_state|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Country *</label>
                                         {{ form.importer_country.errors }}
-                                        {{ form.importer_country|placeholder:'Country *' }}
+                                        {{ form.importer_country|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -138,31 +148,37 @@
                                     <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
                                 </div>
                                 <div class="form-group">
+                                    <label>Exporter Name *</label>
                                     {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'Exporter Name *' }}
+                                    {{ form.exporter_name|placeholder:'' }}
                                 </div>
                                 <div class="form-group">
+                                    <label>Address *</label>
                                     {{ form.exporter_address.errors }}
-                                    {{ form.exporter_address|placeholder:'Address *' }}
+                                    {{ form.exporter_address|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
                                        {{ form.exporter_city.errors }}
-                                       {{ form.exporter_city|placeholder:'City *' }}
+                                       {{ form.exporter_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Zip *</label>
                                         {{ form.exporter_zip.errors }}
-                                        {{ form.exporter_zip|placeholder:'Zip *' }}
+                                        {{ form.exporter_zip|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
                                        {{ form.exporter_state.errors }}
-                                       {{ form.exporter_state|placeholder:'State *' }}
+                                       {{ form.exporter_state|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Country *</label>
                                         {{ form.exporter_country.errors }}
-                                        {{ form.exporter_country|placeholder:'Country *' }}
+                                        {{ form.exporter_country|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -172,22 +188,31 @@
                                 <div class="form-group">
                                     <label>Mode of Transport</label><br />
                                     {{ form.mode_of_transport.errors }}
-                                    {{ form.mode_of_transport|placeholder:'Mode of Transport *' }}
+                                    {{ form.mode_of_transport|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Entry Port *</label>
                                        {{ form.port_of_entry.errors }}
-                                       {{ form.port_of_entry|placeholder:'Entry Port *' }}
+                                       {{ form.port_of_entry|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Exit Port *</label>
                                         {{ form.port_of_exit.errors }}
-                                        {{ form.port_of_exit|placeholder:'Exit Port *' }}
+                                        {{ form.port_of_exit|placeholder:'' }}
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Treatment Type</label><br />
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">                                        
+                                    <label>Treatment Type *</label><br />
                                     {{ form.treatment.errors }}
-                                    {{ form.treatment|placeholder:'Treatment *' }}
+                                    {{ form.treatment|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Other Treatment (if Other)</label>
+                                        {{ form.other_treatment.errors }}
+                                        {{ form.other_treatment|placeholder:'' }}
+                                    </div>
                                 </div>
                                 <div class="text-center">
                                     <hr />
@@ -197,32 +222,38 @@
                             {% for lform in form2 %}    
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Local Name</label>
                                        {{ lform.local_name.errors }}
-                                       {{ lform.local_name|placeholder:'Local Name'}}
+                                       {{ lform.local_name|placeholder:''}}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Scientific Name</label>
                                         {{ lform.scientific_name.errors }}
-                                        {{ lform.scientific_name|placeholder:'Scientific Name'}}
+                                        {{ lform.scientific_name|placeholder:''}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Quantity (BDFT)</label>
                                        {{ lform.quantity.errors }}
-                                       {{ lform.quantity|placeholder:'Quantity (BDFT)' }}
+                                       {{ lform.quantity|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Grade</label>
                                         {{ lform.grade.errors }}
-                                        {{ lform.grade|placeholder:'Grade' }}
+                                        {{ lform.grade|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Value (BZD)</label>
                                        {{ lform.value.errors }}
-                                       {{ lform.value|placeholder:'Value (BZD)' }}
+                                       {{ lform.value|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Remarks </label>
                                         {{ lform.remarks.errors }}
-                                        {{ lform.remarks|placeholder:'Remarks' }}
+                                        {{ lform.remarks|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="text-center">

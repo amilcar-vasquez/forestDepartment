@@ -35,6 +35,13 @@ class Application(models.Model):
         ('Not Approved', 'Not Approved'),
         ('In Review', 'In Review'),
     )
+    PORT_CHOICES = (
+        ('Western Border', 'Western Border'),
+        ('Port of Belize', 'Port of Belize, Belize City'),
+        ('Northern Border', 'Northern Border'),
+        ('PGIA', 'Philip Goldson International Airport'),
+        ('Big Creek', 'Big Creek Port, Stann Creek'),
+    )
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
@@ -47,7 +54,8 @@ class Application(models.Model):
     importer_country    = models.CharField(max_length=100)
     importer_phone = models.CharField(max_length=100)
     importer_email = models.CharField(max_length=100)
-    importer_social = models.CharField(max_length=100)  
+    importer_social = models.CharField(max_length=100) 
+    importer_id_number = models.CharField(max_length=100, blank=True, null=True) 
     importer_business_number = models.CharField(max_length=100)
     exporter_name = models.CharField(max_length=100)
     exporter_address = models.CharField(max_length=100)
@@ -56,9 +64,10 @@ class Application(models.Model):
     exporter_zip = models.CharField(max_length=100)
     exporter_country    = models.CharField(max_length=100)
     mode_of_transport = models.CharField(max_length=100, choices=TRANSPORT_CHOICES) 
-    port_of_entry = models.CharField(max_length=100)
-    port_of_exit = models.CharField(max_length=100)
+    port_of_entry = models.CharField(max_length=100, choices=PORT_CHOICES, blank=True, null=True)
+    port_of_exit = models.CharField(max_length=100, choices=PORT_CHOICES, blank=True, null=True)
     treatment = models.CharField(max_length=100, choices=TREATMENT_CHOICES)
+    other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     species_details = models.ManyToManyField('Species', blank=True)
     files = models.ManyToManyField(File, blank=True)
@@ -134,6 +143,7 @@ class Profile(models.Model):
     profile_type = models.CharField(max_length=100, choices=PROFILE_TYPE_CHOICES)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
     business_document = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    business_name = models.CharField(max_length=100, blank=True, null=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=100, blank=True, null=True)
