@@ -4,12 +4,21 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class ApplicationForm(ModelForm):
+	TREATMENT_CHOICES = (
+        ('Pressure', 'Pressure'),
+        ('Kiln', 'Kiln'),
+        ('Chemical', 'Chemical'),
+        ('Air Dry', 'Air Dry'),
+        ('None', 'None'),
+        ('Other', 'Other'),
+    )
 	goods = forms.CharField(widget=forms.HiddenInput(), initial='Lumber')
+	treatment = forms.MultipleChoiceField(choices=TREATMENT_CHOICES, required=False, label='Treatment(s)')
 
 	class Meta:
 		model = Application
 		fields = ['type', 'importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
-			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'treatment', 'other_treatment'
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry', 'port_of_exit', 'other_treatment', 'source_of_lumber', 'licensee_name', 'license_number', 'sawmill_name', 'sawmill_address', 'validity_period'
 			]
 		
 	def __init__(self, *args, **kwargs):
@@ -45,7 +54,7 @@ class ForgotForm(forms.Form):
 class ProfileForm(ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput(), required=False)
 	confirm_password = forms.CharField(widget=forms.PasswordInput(), required=False, label='Confirm Password')
-	email = forms.EmailField(widget=forms.EmailInput(), required=False, label='Email Address')
+	email = forms.EmailField(widget=forms.EmailInput(), required=True, label='Email Address')
 
 	class Meta:
 		model = Profile

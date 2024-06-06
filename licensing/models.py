@@ -42,6 +42,10 @@ class Application(models.Model):
         ('PGIA', 'Philip Goldson International Airport'),
         ('Big Creek', 'Big Creek Port, Stann Creek'),
     )
+    LUMBER_SOURCE_CHOICES = (
+        ('License', 'Forest License'),
+        ('Sawmill', 'Sawmill/Lumber Yard'),
+    )
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
@@ -70,6 +74,16 @@ class Application(models.Model):
     other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     species_details = models.ManyToManyField('Species', blank=True)
+    source_of_lumber = models.CharField(max_length=100, choices=LUMBER_SOURCE_CHOICES, blank=True, null=True)    
+    licensee_name = models.CharField(max_length=100, blank=True, null=True)
+    license_number = models.CharField(max_length=100, blank=True, null=True)  
+    validity_period = models.CharField(max_length=100, blank=True, null=True)
+    sawmill_name = models.CharField(max_length=100, blank=True, null=True)
+    sawmill_address = models.CharField(max_length=200, blank=True, null=True)
+    endorsement_letter = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    cites_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    vet_certificate = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    id_document = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)    
     files = models.ManyToManyField(File, blank=True)
     date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)
@@ -85,7 +99,7 @@ class Application(models.Model):
 class Lumber(models.Model):
     local_name = models.CharField(max_length=100, blank=True, null=True)
     scientific_name = models.CharField(max_length=100, blank=True, null=True)
-    quantity = models.IntegerField(blank=True, null=True)    
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)    
     grade = models.CharField(max_length=100, blank=True, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     remarks = models.CharField(max_length=100, blank=True, null=True)

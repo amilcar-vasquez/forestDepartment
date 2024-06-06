@@ -216,6 +216,44 @@
                                 </div>
                                 <div class="text-center">
                                     <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Source *</label><br />
+                                    {{ form.source_of_lumber.errors }}
+                                    {{ form.source_of_lumber|placeholder:'' }}
+                                </div>
+                                <div class="form-group row" id="forest_license">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Licensee Name*</label>
+                                       {{ form.licensee_name.errors }}
+                                       {{ form.licensee_name|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>License Number *</label>
+                                        {{ form.license_number.errors }}
+                                        {{ form.license_number|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Validity Period *</label>
+                                        {{ form.validity_period.errors }}
+                                        {{ form.validity_period|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="sawmill">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Sawmill Name*</label>
+                                       {{ form.sawmill_name.errors }}
+                                       {{ form.sawmill_name|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Sawmill Address *</label>
+                                        {{ form.sawmill_address.errors }}
+                                        {{ form.sawmill_address|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Lumber Details</h2>
                                     {{ form2.management_form }}
                                 </div>
@@ -316,6 +354,20 @@ documents may be requested during the vetting process. If at any point during th
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+    <script type="text/javascript">
+        $( "#id_source_of_lumber" ).change(function(e) {
+            e.preventDefault();
+
+            var data = $(this).val();
+            if(data == 'License') {
+                $('#forest_license').show();
+                $('#sawmill').hide();
+            } else {
+                $('#forest_license').hide();
+                $('#sawmill').show();
+            }
+        });
+    </script>
 
 </body>
 
