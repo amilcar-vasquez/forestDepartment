@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.forms import formset_factory, modelformset_factory
 
-from .models import Application, Profile
+from .models import Application, Profile, CITESList
 from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm
 from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
@@ -186,3 +186,11 @@ def forgot(request):
         form = ForgotForm()
 
     return render(request, 'members/forgot.html', {'form': form})
+
+def cites_autocomplete(request):
+    if request.GET.get('q'):
+        q = request.GET['q']
+        books = CITESList.objects.filter(species__startswith=q)
+        return JsonResponse([book.serialize() for book in books], safe=False)
+    else:
+        HttpResponse("No cookies")

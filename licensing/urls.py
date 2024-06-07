@@ -12,5 +12,6 @@ urlpatterns = [
     path('view/<int:id>', views.view, name="view"),
     path('qr/<int:id>', views.qr, name="qr"),
     path('profile', views.profile, name="profile"), 
-    path('forgot', views.forgot, name="forgot")
+    path('forgot', views.forgot, name="forgot"),
+    path('cites_autocomplete/', views.cites_autocomplete, name='cites_autocomplete'),
 ]

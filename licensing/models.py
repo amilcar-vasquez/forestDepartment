@@ -154,6 +154,12 @@ class CITESList(models.Model):
 
     def __str__(self):
         return self.species
+    
+    def serialize(self):
+        return {
+            "species": self.species,
+            "scientific_name": self.scientific_name
+        }
 
 class Profile(models.Model):
     PROFILE_TYPE_CHOICES = (

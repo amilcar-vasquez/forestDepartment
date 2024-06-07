@@ -359,6 +359,8 @@ documents may be requested during the vetting process. If at any point during th
     <!-- Core plugin JavaScript-->
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
     <script type="text/javascript">
@@ -398,6 +400,26 @@ documents may be requested during the vetting process. If at any point during th
             var quantity = cubic / 0.00235974;
             $(this).closest('.form-group').find('.quantity').val(quantity);
         });
+        $('.basicAutoComplete').autoComplete({
+            minLength: 1,
+            formatResult: function (item) {
+                return {
+                    value: item.scientific_name,
+                    text: item.species,
+                    html: [
+                        item.species + ' - ' + item.scientific_name
+                    ]
+                };
+            },
+        
+        }
+        );
+        $('.dropdown-menu').css({'top': 'auto', 'left': 'auto'})
+        $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+            $(this).closest('.form-group').find('.scientific_name').val(item.scientific_name);
+
+        });
+
     </script>
 
 </body>
