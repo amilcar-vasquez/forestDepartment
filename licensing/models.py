@@ -122,7 +122,8 @@ class Species(models.Model):
         ('Pet', 'Pet'),
         ('Other', 'Other'),
     )
-    name = models.CharField(max_length=100)
+    local_name = models.CharField(max_length=100)
+    scientific_name = models.CharField(max_length=100)
     country_of_origin = models.CharField(max_length=100)
     CITES_status = models.CharField(max_length=100, choices=CITES_CHOICES)
     number_of_individuals = models.IntegerField(default=1)
@@ -132,24 +133,27 @@ class Species(models.Model):
     def __str__(self):
         return self.name
 
-class SpeciesType(models.Model):
-    TYPE_CHOICES = (
-        ('Live Specimen', 'Live Specimen'),
-        ('Plant Sample', 'Plant Sample'),
-        ('Blood Sample', 'Blood Sample'),
-        ('Tissue Sample', 'Tissue Sample'),
-        ('Feather Sample', 'Feather Sample'),
-        ('Swab Sample', 'Swab Sample (Buccal/Skin)'),
-        ('Other', 'Other'),
+class CITESList(models.Model):
+    CITES_CHOICES = (
+        ('I', 'Appendix I'),
+        ('II', 'Appendix II'),
+        ('III', 'Appendix III'),
     )
-    type = models.CharField(max_length=100, choices=TYPE_CHOICES)
-    species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True, null=True)
-    number_of_individuals = models.IntegerField(default=1)
-    mode_of_storage = models.CharField(max_length=100, blank=True, null=True)
-    tests_to_be_conducted = models.TextField(blank=True, null=True)
+    CITES_id = models.CharField(max_length=100)
+    kingdom = models.CharField(max_length=100, blank=True, null=True)
+    phylum = models.CharField(max_length=100, blank=True, null=True)
+    class_name = models.CharField(max_length=100, blank=True, null=True)
+    order = models.CharField(max_length=100, blank=True, null=True)
+    family = models.CharField(max_length=100, blank=True, null=True)
+    genus = models.CharField(max_length=100, blank=True, null=True)
+    species = models.CharField(max_length=100)
+    sub_species = models.CharField(max_length=100, blank=True, null=True)
+    scientific_name = models.CharField(max_length=100)
+    rank = models.CharField(max_length=100, blank=True, null=True)
+    listing = models.CharField(max_length=100, choices=CITES_CHOICES)
 
     def __str__(self):
-        return self.type
+        return self.species
 
 class Profile(models.Model):
     PROFILE_TYPE_CHOICES = (
