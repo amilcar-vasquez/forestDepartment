@@ -33,3 +33,5 @@ pyotp==2.8.0
 qrcode==7.4.2
 django-pwa
 Pillow==10.3.0
+django-phonenumber-field
+django-phonenumbers

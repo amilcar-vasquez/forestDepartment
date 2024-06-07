@@ -3,6 +3,8 @@ from styleguide_example.users.models import BaseUser
 from styleguide_example.files.models import File
 from datetime import datetime, date
 
+from phonenumber_field.modelfields import PhoneNumberField 
+
 # Create your models here.
 class Application(models.Model):
     TYPE_CHOICES = (
@@ -56,11 +58,11 @@ class Application(models.Model):
     importer_state = models.CharField(max_length=100)
     importer_zip = models.CharField(max_length=100)
     importer_country    = models.CharField(max_length=100)
-    importer_phone = models.CharField(max_length=100)
+    importer_phone = PhoneNumberField(region='US')
     importer_email = models.CharField(max_length=100)
     importer_social = models.CharField(max_length=100) 
     importer_id_number = models.CharField(max_length=100, blank=True, null=True) 
-    importer_business_number = models.CharField(max_length=100)
+    importer_business_number = PhoneNumberField(region='US', blank=True, null=True)
     exporter_name = models.CharField(max_length=100)
     exporter_address = models.CharField(max_length=100)
     exporter_city = models.CharField(max_length=100)
@@ -99,7 +101,8 @@ class Application(models.Model):
 class Lumber(models.Model):
     local_name = models.CharField(max_length=100, blank=True, null=True)
     scientific_name = models.CharField(max_length=100, blank=True, null=True)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)    
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    cubic_meters = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)    
     grade = models.CharField(max_length=100, blank=True, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     remarks = models.CharField(max_length=100, blank=True, null=True)

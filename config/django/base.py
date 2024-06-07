@@ -52,7 +52,8 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "django_extensions",
     "rest_framework_jwt",
-    'pwa'
+    'pwa', 
+    'phonenumber_field',
 ]
 
 INSTALLED_APPS = [
@@ -157,6 +158,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+PHONENUMBER_DEFAULT_REGION = "US"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

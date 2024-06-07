@@ -29,12 +29,12 @@ class ApplicationForm(ModelForm):
 class LumberForm(ModelForm):
 	class Meta:
 		model = Lumber
-		fields = ['local_name', 'scientific_name', 'quantity', 'grade', 'value', 'remarks']
+		fields = ['local_name', 'scientific_name', 'quantity', 'cubic_meters', 'grade', 'value', 'remarks']
 		
 	def __init__(self, *args, **kwargs):
 		super(LumberForm, self).__init__(*args, **kwargs)
 		for field in self.fields:
-			self.fields[field].widget.attrs['class'] = 'form-control'
+			self.fields[field].widget.attrs['class'] = 'form-control ' + field
 
 class ForgotForm(forms.Form):
 	email = forms.EmailField(label = 'Your Email')

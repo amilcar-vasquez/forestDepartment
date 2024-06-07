@@ -102,11 +102,13 @@
                                         <label>Importer Phone *</label>
                                         {{ form.importer_phone.errors }}
                                         {{ form.importer_phone|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
                                     </div>
                                     <div class="col-sm-6">
                                         <label>Business Phone Number *</label>
                                         {{ form.importer_business_number.errors }}
                                         {{ form.importer_business_number|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -191,12 +193,12 @@
                                     {{ form.mode_of_transport|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry">
                                         <label>Entry Port *</label>
                                        {{ form.port_of_entry.errors }}
                                        {{ form.port_of_entry|placeholder:'' }}
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" id="port_of_exit">
                                         <label>Exit Port *</label>
                                         {{ form.port_of_exit.errors }}
                                         {{ form.port_of_exit|placeholder:'' }}
@@ -277,9 +279,9 @@
                                        {{ lform.quantity|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Grade</label>
-                                        {{ lform.grade.errors }}
-                                        {{ lform.grade|placeholder:'' }}
+                                        <label>Cubic Meters</label>
+                                        {{ lform.cubic_meters.errors }}
+                                        {{ lform.cubic_meters|placeholder:'' }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -289,10 +291,15 @@
                                        {{ lform.value|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Remarks </label>
-                                        {{ lform.remarks.errors }}
-                                        {{ lform.remarks|placeholder:'' }}
+                                        <label>Grade</label>
+                                        {{ lform.grade.errors }}
+                                        {{ lform.grade|placeholder:'' }}
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Remarks</label>
+                                    {{ lform.remarks.errors }}
+                                    {{ lform.remarks|placeholder:'' }}
                                 </div>
                                 <div class="text-center">
                                     <hr />
@@ -366,6 +373,30 @@ documents may be requested during the vetting process. If at any point during th
                 $('#forest_license').hide();
                 $('#sawmill').show();
             }
+        });
+        // lets hide the port of exit on type change
+        $( "#id_type" ).change(function(e) {
+            e.preventDefault();
+
+            var data = $(this).val();
+            if(data == 'Import') {
+                $('#port_of_exit').hide();
+                $('#port_of_import').show();
+            } else {
+                $('#port_of_exit').show();
+                $('#port_of_import').hide();
+            }
+        });
+        //convert BDFT to cubic meters and vice versa
+        $('.quantity').on('input', function() {
+            var quantity = $(this).val();
+            var cubic = quantity * 0.00235974;
+            $(this).closest('.form-group').find('.cubic_meters').val(cubic);
+        });
+        $('.cubic_meters').on('input', function() {
+            var cubic = $(this).val();
+            var quantity = cubic / 0.00235974;
+            $(this).closest('.form-group').find('.quantity').val(quantity);
         });
     </script>
 
