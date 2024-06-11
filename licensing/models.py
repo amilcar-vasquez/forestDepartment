@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, connection
 from styleguide_example.users.models import BaseUser
 from styleguide_example.files.models import File
 from datetime import datetime, date
@@ -149,6 +149,7 @@ class CITESList(models.Model):
     species = models.CharField(max_length=100)
     sub_species = models.CharField(max_length=100, blank=True, null=True)
     scientific_name = models.CharField(max_length=100)
+    common_name = models.CharField(max_length=500, blank=True, null=True)
     rank = models.CharField(max_length=100, blank=True, null=True)
     listing = models.CharField(max_length=100, choices=CITES_CHOICES)
 
@@ -157,9 +158,14 @@ class CITESList(models.Model):
     
     def serialize(self):
         return {
-            "species": self.species,
+            "common_name": self.common_name,
             "scientific_name": self.scientific_name
         }
+    
+    @classmethod
+    def truncate(cls):
+        with connection.cursor() as cursor:
+            cursor.execute('TRUNCATE TABLE {} CASCADE'.format(cls._meta.db_table))
 
 class Profile(models.Model):
     PROFILE_TYPE_CHOICES = (

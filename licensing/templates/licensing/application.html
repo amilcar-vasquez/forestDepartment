@@ -405,9 +405,9 @@ documents may be requested during the vetting process. If at any point during th
             formatResult: function (item) {
                 return {
                     value: item.scientific_name,
-                    text: item.species,
+                    text: item.common_name,
                     html: [
-                        item.species + ' - ' + item.scientific_name
+                        item.common_name + ' - ' + item.scientific_name
                     ]
                 };
             },

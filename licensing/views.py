@@ -190,7 +190,7 @@ def forgot(request):
 def cites_autocomplete(request):
     if request.GET.get('q'):
         q = request.GET['q']
-        books = CITESList.objects.filter(species__startswith=q)
+        books = CITESList.objects.filter(common_name__contains=q)
         return JsonResponse([book.serialize() for book in books], safe=False)
     else:
         HttpResponse("No cookies")

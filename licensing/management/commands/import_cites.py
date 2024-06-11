@@ -15,6 +15,7 @@ class Command(BaseCommand):
         import_list(file_path)
 
 def import_list(file_path):
+    CITESList.truncate()
     with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -30,5 +31,6 @@ def import_list(file_path):
                 sub_species=row['Subspecies'],
                 scientific_name=row['Scientific Name'],
                 rank=row['Rank'],
-                listing=row['Listing']
+                listing=row['Listing'],                
+                common_name=row['Common Name'],
             )
