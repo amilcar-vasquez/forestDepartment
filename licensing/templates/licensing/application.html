@@ -63,16 +63,16 @@
                                 {% endif %}
                                 <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
                                 <br />
-                                <div class="text-center">
-                                   
-                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
-                                    <hr />
-                                </div>
                                 <div class="form-group">
                                     <label>License Type *:</label>
                                     {{ form.type.errors }}
                                     {{ form.type|placeholder:'Application Type'}}             
                                 </div>
+                            <div id="import_container">
+                                <div class="text-center">                                   
+                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
+                                    <hr />
+                                </div>                                
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Contact Name *</label>
@@ -183,6 +183,128 @@
                                         {{ form.exporter_country|placeholder:'' }}
                                     </div>
                                 </div>
+                            </div>
+                            <div id="export_container" style="display: none">
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Exporter Name *</label>
+                                    {{ form.exporter_name.errors }}
+                                    {{ form.exporter_name|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.exporter_address.errors }}
+                                    {{ form.exporter_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.exporter_city.errors }}
+                                       {{ form.exporter_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.exporter_zip.errors }}
+                                        {{ form.exporter_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.exporter_state.errors }}
+                                       {{ form.exporter_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.exporter_country.errors }}
+                                        {{ form.exporter_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">                                   
+                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
+                                    <hr />
+                                </div>
+                                <div class="form-group">
+                                    <label>License Type *:</label>
+                                    {{ form.type.errors }}
+                                    {{ form.type|placeholder:'Application Type'}}             
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Contact Name *</label>
+                                        {{ form.importer_name.errors }}
+                                        {{ form.importer_name|placeholder:''}}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Company Name * </label>
+                                        {{ form.importer_company_name.errors }}
+                                        {{ form.importer_company_name|placeholder:'' }}   
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Email *</label>
+                                        {{ form.importer_email.errors }}
+                                        {{ form.importer_email|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Importer Social Security Number *</label>
+                                        {{ form.importer_social.errors }}
+                                        {{ form.importer_social|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Phone *</label>
+                                        {{ form.importer_phone.errors }}
+                                        {{ form.importer_phone|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Business Phone Number *</label>
+                                        {{ form.importer_business_number.errors }}
+                                        {{ form.importer_business_number|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Registration Number *</label>
+                                    {{ form.company_registry_number.errors }}
+                                    {{ form.company_registry_number|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.importer_address.errors }}
+                                    {{ form.importer_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.importer_city.errors }}
+                                       {{ form.importer_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.importer_zip.errors }}
+                                        {{ form.importer_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.importer_state.errors }}
+                                       {{ form.importer_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.importer_country.errors }}
+                                        {{ form.importer_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                            </div>
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
@@ -193,16 +315,27 @@
                                     {{ form.mode_of_transport|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry">
-                                        <label>Entry Port *</label>
-                                       {{ form.port_of_entry.errors }}
-                                       {{ form.port_of_entry|placeholder:'' }}
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_bz">
+                                        <label>Port of Entry in Belize *</label>
+                                       {{ form.port_of_entry_bz.errors }}
+                                       {{ form.port_of_entry_bz|placeholder:'' }}
                                     </div>
-                                    <div class="col-sm-6" id="port_of_exit">
-                                        <label>Exit Port *</label>
-                                        {{ form.port_of_exit.errors }}
-                                        {{ form.port_of_exit|placeholder:'' }}
+                                    <div class="col-sm-6" id="port_of_exit_int">
+                                        <label>Port of Exit at Origin *</label>
+                                        {{ form.port_of_exit_int.errors }}
+                                        {{ form.port_of_exit_int|placeholder:'' }}
                                     </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_int" style="display: none;">
+                                        <label>Port of Entry at Destination</label>
+                                       {{ form.port_of_entry_int.errors }}
+                                       {{ form.port_of_entry_int|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6" id="port_of_exit_bz" style="display: none;">
+                                        <label>Port of Exit in Belize *</label>
+                                        {{ form.port_of_exit_bz.errors }}
+                                        {{ form.port_of_exit_bz|placeholder:'' }}
+                                    </div>
+                                   
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">                                        
@@ -216,6 +349,7 @@
                                         {{ form.other_treatment|placeholder:'' }}
                                     </div>
                                 </div>
+                            <div id="source_of_lumber_container">    
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
@@ -254,12 +388,23 @@
                                         {{ form.sawmill_address|placeholder:'' }}
                                     </div>
                                 </div>
+                            </div>
                                 <div class="text-center">
                                     <hr />
+                                    <span>
                                     <h2 class="h5 text-gray-900 mb-4">Lumber Details</h2>
+                                        <div class="col-auto">
+                                        <a href="javascript:none" id="add_lumber"><i class="fas fa-plus "></i> Add More Fields </a>
+                                        </div>
+                                    </span>
                                     {{ form2.management_form }}
                                 </div>
-                            {% for lform in form2 %}    
+                            {% for lform in form2 %}
+                            {% if forloop.first %}
+                            <div id="lform_{{ forloop.counter }}">
+                            {% else %}
+                            <div id="lform_{{ forloop.counter }}" style="display: none;"> 
+                            {% endif %}
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Local Name</label>
@@ -304,6 +449,7 @@
                                 <div class="text-center">
                                     <hr />
                                 </div>
+                            </div>
                             {% endfor %}
                             <div class="text-center">
                                 <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
@@ -382,11 +528,21 @@ documents may be requested during the vetting process. If at any point during th
 
             var data = $(this).val();
             if(data == 'Import') {
-                $('#port_of_exit').hide();
-                $('#port_of_import').show();
+                $("#source_of_lumber_container").hide();
+                $("#export_container").hide()
+                $("#import_container").show()
+                $('#port_of_exit_bz').hide();
+                $('#port_of_entry_bz').show();
+                $('#port_of_entry_int').hide();
+                $('#port_of_exit_int').show();
             } else {
-                $('#port_of_exit').show();
-                $('#port_of_import').hide();
+                $("#source_of_lumber_container").show();
+                $("#import_container").hide();
+                $("#export_container").show();
+                $('#port_of_exit_bz').show();
+                $('#port_of_entry_bz').hide();
+                $("#port_of_entry_int").show();
+                $("#port_of_exit_int").hide();
             }
         });
         //convert BDFT to cubic meters and vice versa
@@ -418,6 +574,16 @@ documents may be requested during the vetting process. If at any point during th
         $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
             $(this).closest('.form-group').find('.scientific_name').val(item.scientific_name);
 
+        });
+        var form_counter = 2;
+        $("#add_lumber").on('click', function(){
+            if(form_counter < 6) {
+                $("#lform_" + form_counter).show();
+                form_counter++;
+            } else {
+                $(this).hide();
+            }
+           
         });
 
     </script>
