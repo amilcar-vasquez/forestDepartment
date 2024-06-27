@@ -18,7 +18,8 @@ class ApplicationForm(ModelForm):
 	class Meta:
 		model = Application
 		fields = ['type', 'importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
-			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment',
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment', 'packing_list', 
+			'performa_invoice', 'picture_of_material', 'zero_balance_receipt', 'sawmill_proof'
 			]
 		
 	def __init__(self, *args, **kwargs):

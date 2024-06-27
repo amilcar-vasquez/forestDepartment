@@ -29,6 +29,7 @@ def lumberapplication(request):
     if request.user.is_authenticated == False:
         messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
         return redirect('/licensing/login')
+    profile = Profile.objects.get(user=request.user)
     LumberFormset = formset_factory(LumberForm, extra=5)
     SourceFormset = formset_factory(SourceOfLumberForm, extra=10)
     FilesFormset = modelformset_factory(File, fields=('file',), extra=3)

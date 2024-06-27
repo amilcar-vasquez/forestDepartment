@@ -354,7 +354,7 @@
                                     <span>
                                     <h2 class="h5 text-gray-900 mb-4">Lumber Details</h2>
                                         <div class="col-auto">
-                                        <a href="javascript:none" id="add_lumber"><i class="fas fa-plus "></i> Add More Fields </a>
+                                        <a href="javascript:void(0)" id="add_lumber"><i class="fas fa-plus "></i> Add More Fields </a>
                                         </div>
                                     </span>
                                     {{ form2.management_form }}
@@ -416,7 +416,7 @@
                                 <span>
                                 <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
                                     <div class="col-auto">
-                                    <a href="javascript:none" id="add_source"><i class="fas fa-plus "></i> Add More Fields </a>
+                                    <a href="javascript:void(0)" id="add_source"><i class="fas fa-plus "></i> Add More Fields </a>
                                     </div>
                                 </span>
                                 {{ form2.management_form }}
@@ -473,17 +473,47 @@
                                
                                 <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
                                 <hr />
-                                {{ files.management_form }}
-                                {% for hidden in files.hidden_fields %}
-                                        {{hidden}}
-                                {% endfor %}
                             </div>
-                            {% for file in files %}
+                            {% if profile.profile_type == 'Business' %}
                                 <div class="form-group">
-                                    {{ file.file.errors }}
-                                    {{ file.file|placeholder:'File' }}
+                                    <label>Packing List</label>
+                                    {{ form.packing_list.errors }}
+                                    {{ form.packing_list|placeholder:'File' }}
                                 </div>
-                            {% endfor %}
+                                <div class="form-group">
+                                    <label>Performa Invoice</label>
+                                    {{ form.performa_invoice.errors }}
+                                    {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <label>Picture of Material</label>
+                                    {{ form.picture_of_material.errors }}
+                                    {{ form.picture_of_material|placeholder:'File' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Packing List</label>
+                                    {{ form.packing_list.errors }}
+                                    {{ form.packing_list|placeholder:'File' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Performa Invoice</label>
+                                    {{ form.performa_invoice.errors }}
+                                    {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                                <div id="export_docs">
+                                    <div class="form-group">
+                                        <label>Proof of zero balance to Forest Department</label>
+                                        {{ form.zero_balance_receipt.errors }}
+                                        {{ form.zero_balance_receipt|placeholder:'File' }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sawmill Proof of legal acquisition</label>
+                                        {{ form.sawmill_proof.errors }}
+                                        {{ form.sawmill_proof|placeholder:'File' }}
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="text-center">
                                 <hr />
                                 <small>
@@ -558,6 +588,7 @@ documents may be requested during the vetting process. If at any point during th
                 $('#port_of_entry_bz').show();
                 $('#port_of_entry_int').hide();
                 $('#port_of_exit_int').show();
+                $("#export_docs").hide();
             } else {
                 $("#source_of_lumber_container").show();
                 $("#import_container").hide();
@@ -566,18 +597,19 @@ documents may be requested during the vetting process. If at any point during th
                 $('#port_of_entry_bz').hide();
                 $("#port_of_entry_int").show();
                 $("#port_of_exit_int").hide();
+                $("#export_docs").show();
             }
         });
         //convert BDFT to cubic meters and vice versa
         $('.quantity').on('input', function() {
             var quantity = $(this).val();
             var cubic = quantity * 0.00235974;
-            $(this).closest('.form-group').find('.cubic_meters').val(cubic);
+            $(this).closest('.form-group').find('.cubic_meters').val(Math.round(cubic * 100)/100);
         });
         $('.cubic_meters').on('input', function() {
             var cubic = $(this).val();
             var quantity = cubic / 0.00235974;
-            $(this).closest('.form-group').find('.quantity').val(quantity);
+            $(this).closest('.form-group').find('.quantity').val(Math.round(quantity * 100)/100);
         });
         $('.basicAutoComplete').autoComplete({
             minLength: 1,
