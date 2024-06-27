@@ -1,0 +1,608 @@
+{% load static %}
+{% load myfilters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Forestry Licensing - Application</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-success">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-application-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
+                                <h1 class="h4 text-gray-900 mb-4">New Wildlife/Species Application</h1>
+                                <small>All fields with an * are required fields. </small>
+                            </div>
+                            <form action="/licensing/wildlifeapplication" method="POST" enctype="multipart/form-data" class="user">
+                                {% csrf_token %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{hidden}}
+                                {% endfor %}
+                                {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.errors }}
+                                    </div>
+                                {% endif %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="col-lg-12 mb-4">
+                                    <div class="card bg-{{message.tags}} text-white shadow">
+                                        <div class="card-body">
+                                        {{ message }}
+                                        </div>
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
+                                <br />
+                                <div class="form-group">
+                                    <label>License Type *:</label>
+                                    {{ form.type.errors }}
+                                    {{ form.type|placeholder:'Application Type'}}             
+                                </div>
+                            <div id="import_container">
+                                <div class="text-center">                                   
+                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
+                                    <hr />
+                                </div>                                
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Contact Name *</label>
+                                        {{ form.importer_name.errors }}
+                                        {{ form.importer_name|placeholder:''}}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Company Name * </label>
+                                        {{ form.importer_company_name.errors }}
+                                        {{ form.importer_company_name|placeholder:'' }}   
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Email *</label>
+                                        {{ form.importer_email.errors }}
+                                        {{ form.importer_email|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Importer Social Security Number *</label>
+                                        {{ form.importer_social.errors }}
+                                        {{ form.importer_social|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Phone *</label>
+                                        {{ form.importer_phone.errors }}
+                                        {{ form.importer_phone|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Business Phone Number *</label>
+                                        {{ form.importer_business_number.errors }}
+                                        {{ form.importer_business_number|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Registration Number *</label>
+                                    {{ form.company_registry_number.errors }}
+                                    {{ form.company_registry_number|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.importer_address.errors }}
+                                    {{ form.importer_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.importer_city.errors }}
+                                       {{ form.importer_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.importer_zip.errors }}
+                                        {{ form.importer_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.importer_state.errors }}
+                                       {{ form.importer_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.importer_country.errors }}
+                                        {{ form.importer_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Exporter Name *</label>
+                                    {{ form.exporter_name.errors }}
+                                    {{ form.exporter_name|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.exporter_address.errors }}
+                                    {{ form.exporter_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.exporter_city.errors }}
+                                       {{ form.exporter_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.exporter_zip.errors }}
+                                        {{ form.exporter_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.exporter_state.errors }}
+                                       {{ form.exporter_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.exporter_country.errors }}
+                                        {{ form.exporter_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="export_container" style="display: none">
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Exporter Name *</label>
+                                    {{ form.exporter_name.errors }}
+                                    {{ form.exporter_name|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.exporter_address.errors }}
+                                    {{ form.exporter_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.exporter_city.errors }}
+                                       {{ form.exporter_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.exporter_zip.errors }}
+                                        {{ form.exporter_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.exporter_state.errors }}
+                                       {{ form.exporter_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.exporter_country.errors }}
+                                        {{ form.exporter_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="text-center">                                   
+                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
+                                    <hr />
+                                </div>
+                                <div class="form-group">
+                                    <label>License Type *:</label>
+                                    {{ form.type.errors }}
+                                    {{ form.type|placeholder:'Application Type'}}             
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Contact Name *</label>
+                                        {{ form.importer_name.errors }}
+                                        {{ form.importer_name|placeholder:''}}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Company Name * </label>
+                                        {{ form.importer_company_name.errors }}
+                                        {{ form.importer_company_name|placeholder:'' }}   
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Email *</label>
+                                        {{ form.importer_email.errors }}
+                                        {{ form.importer_email|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Importer Social Security Number *</label>
+                                        {{ form.importer_social.errors }}
+                                        {{ form.importer_social|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Importer Phone *</label>
+                                        {{ form.importer_phone.errors }}
+                                        {{ form.importer_phone|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Business Phone Number *</label>
+                                        {{ form.importer_business_number.errors }}
+                                        {{ form.importer_business_number|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Registration Number *</label>
+                                    {{ form.company_registry_number.errors }}
+                                    {{ form.company_registry_number|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.importer_address.errors }}
+                                    {{ form.importer_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.importer_city.errors }}
+                                       {{ form.importer_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.importer_zip.errors }}
+                                        {{ form.importer_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.importer_state.errors }}
+                                       {{ form.importer_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.importer_country.errors }}
+                                        {{ form.importer_country|placeholder:'' }}
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mode of Transport</label><br />
+                                    {{ form.mode_of_transport.errors }}
+                                    {{ form.mode_of_transport|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_bz">
+                                        <label>Port of Entry in Belize *</label>
+                                       {{ form.port_of_entry_bz.errors }}
+                                       {{ form.port_of_entry_bz|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6" id="port_of_exit_int">
+                                        <label>Port of Exit at Origin *</label>
+                                        {{ form.port_of_exit_int.errors }}
+                                        {{ form.port_of_exit_int|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_int" style="display: none;">
+                                        <label>Port of Entry at Destination</label>
+                                       {{ form.port_of_entry_int.errors }}
+                                       {{ form.port_of_entry_int|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6" id="port_of_exit_bz" style="display: none;">
+                                        <label>Port of Exit in Belize *</label>
+                                        {{ form.port_of_exit_bz.errors }}
+                                        {{ form.port_of_exit_bz|placeholder:'' }}
+                                    </div>
+                                   
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">                                        
+                                    <label>Treatment Type *</label><br />
+                                    {{ form.treatment.errors }}
+                                    {{ form.treatment|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Other Treatment (if Other)</label>
+                                        {{ form.other_treatment.errors }}
+                                        {{ form.other_treatment|placeholder:'' }}
+                                    </div>
+                                </div>                            
+                                <div class="text-center">
+                                    <hr />
+                                    <span>
+                                    <h2 class="h5 text-gray-900 mb-4">Species Details</h2>
+                                        <div class="col-auto">
+                                        <a href="javascript:void(0)" id="add_lumber"><i class="fas fa-plus "></i> Add More Fields </a>
+                                        </div>
+                                    </span>
+                                    {{ form2.management_form }}
+                                </div>
+                            {% for lform in form2 %}
+                            {% if forloop.first %}
+                            <div id="lform_{{ forloop.counter }}">
+                            {% else %}
+                            <div id="lform_{{ forloop.counter }}" style="display: none;"> 
+                            {% endif %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Local Name</label>
+                                       {{ lform.local_name.errors }}
+                                       {{ lform.local_name|placeholder:''}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Scientific Name</label>
+                                        {{ lform.scientific_name.errors }}
+                                        {{ lform.scientific_name|placeholder:''}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Country of Origin</label>
+                                       {{ lform.country_of_origin.errors }}
+                                       {{ lform.country_of_origin|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>CITES Status</label>
+                                        {{ lform.CITES_status.errors }}
+                                        {{ lform.CITES_status|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Number of Individuals</label>
+                                       {{ lform.number_of_individuals.errors }}
+                                       {{ lform.number_of_individuals|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Class of Goods</label>
+                                        {{ lform.class_of_goods.errors }}
+                                        {{ lform.class_of_goods|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Identification</label>
+                                    {{ lform.identification.errors }}
+                                    {{ lform.identification|placeholder:'' }}
+                                </div>
+                                <div class="text-center">
+                                    <hr />
+                                </div>
+                            </div>
+                            {% endfor %}                           
+                            <div class="text-center">
+                                <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
+                                <hr />
+                            </div>
+                            
+
+                            <div class="text-center">
+                               
+                                <h2 class="h5 text-gray-900 mb-4">Supporting Files</h2>
+                                <hr />
+                            </div>
+                            {% if profile.profile_type == 'Business' %}
+                                <div class="form-group">
+                                    <label>Packing List</label>
+                                    {{ form.packing_list.errors }}
+                                    {{ form.packing_list|placeholder:'File' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Performa Invoice</label>
+                                    {{ form.performa_invoice.errors }}
+                                    {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <label>Picture of Material</label>
+                                    {{ form.picture_of_material.errors }}
+                                    {{ form.picture_of_material|placeholder:'File' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Packing List</label>
+                                    {{ form.packing_list.errors }}
+                                    {{ form.packing_list|placeholder:'File' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Performa Invoice</label>
+                                    {{ form.performa_invoice.errors }}
+                                    {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                                <div id="export_docs">
+                                    <div class="form-group">
+                                        <label>Proof of zero balance to Forest Department</label>
+                                        {{ form.zero_balance_receipt.errors }}
+                                        {{ form.zero_balance_receipt|placeholder:'File' }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sawmill Proof of legal acquisition</label>
+                                        {{ form.sawmill_proof.errors }}
+                                        {{ form.sawmill_proof|placeholder:'File' }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="text-center">
+                                <hr />
+                                <small>
+                                    <b>Disclaimer:</b>
+                                    Submitting this application form does not guarantee approval of application. All information provided in this application form is confidential and will only be used for the purpose of vetting the application. Other details and/or
+documents may be requested during the vetting process. If at any point during the vetting process it is found that information provided is false it will result in the application not being considered for the granting of a permit.
+                                </small>
+                                <hr />
+                            </div>
+                                <input type="submit" value="Apply Now" class="btn btn-primary btn-user btn-block" />     
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/licensing/forgot">Forgot Code?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/licensing/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+    <script type="text/javascript">
+        $( ".source_of_lumber" ).change(function(e) {
+            e.preventDefault();
+
+            var data = $(this).val();
+            var id = $(this).attr('id');
+            if (id == 'id_source-0-source_of_lumber') {
+                if(data == 'License') {
+                    $('#forest_license_1').show();
+                    $('#sawmill_1').hide();
+                } else {
+                    $('#forest_license_1').hide();
+                    $('#sawmill_1').show();
+                }
+            } else {
+                if(data == 'License') {
+                    $('#forest_license_' + $(this).attr('data-counter')).show();
+                    $('#sawmill_' + $(this).attr('data-counter')).hide();
+                } else {
+                    $('#forest_license_' + $(this).attr('data-counter')).hide();
+                    $('#sawmill_' + $(this).attr('data-counter')).show();
+                }
+            }
+        });
+        // lets hide the port of exit on type change
+        $( "#id_type" ).change(function(e) {
+            e.preventDefault();
+
+            var data = $(this).val();
+            if(data == 'Import') {
+                $("#source_of_lumber_container").hide();
+                $("#export_container").hide()
+                $("#import_container").show()
+                $('#port_of_exit_bz').hide();
+                $('#port_of_entry_bz').show();
+                $('#port_of_entry_int').hide();
+                $('#port_of_exit_int').show();
+                $("#export_docs").hide();
+            } else {
+                $("#source_of_lumber_container").show();
+                $("#import_container").hide();
+                $("#export_container").show();
+                $('#port_of_exit_bz').show();
+                $('#port_of_entry_bz').hide();
+                $("#port_of_entry_int").show();
+                $("#port_of_exit_int").hide();
+                $("#export_docs").show();
+            }
+        });
+        //convert BDFT to cubic meters and vice versa
+        $('.quantity').on('input', function() {
+            var quantity = $(this).val();
+            var cubic = quantity * 0.00235974;
+            $(this).closest('.form-group').find('.cubic_meters').val(Math.round(cubic * 100)/100);
+        });
+        $('.cubic_meters').on('input', function() {
+            var cubic = $(this).val();
+            var quantity = cubic / 0.00235974;
+            $(this).closest('.form-group').find('.quantity').val(Math.round(quantity * 100)/100);
+        });
+        $('.basicAutoComplete').autoComplete({
+            minLength: 1,
+            formatResult: function (item) {
+                return {
+                    value: item.scientific_name,
+                    text: item.common_name,
+                    html: [
+                        item.common_name + ' - ' + item.scientific_name
+                    ]
+                };
+            },
+        
+        }
+        );
+        $('.dropdown-menu').css({'top': 'auto', 'left': 'auto'})
+        $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+            $(this).closest('.form-group').find('.scientific_name').val(item.scientific_name);
+
+        });
+        var form_counter = 2;
+        $("#add_lumber").on('click', function(){
+            if(form_counter < 11) {
+                $("#lform_" + form_counter).show();
+                form_counter++;
+            } else {
+                $(this).hide();
+            }
+           
+        });
+        var sform_counter = 2;
+        $("#add_source").on('click', function(){
+            if(sform_counter < 6) {
+                id = 'id_source-'+ (sform_counter-1) + '-source_of_lumber';
+                $('#' + id).attr('data-counter', sform_counter);
+                $("#sform_" + sform_counter).show();
+                sform_counter++;
+            } else {
+                $(this).hide();
+            }
+           
+        }); 
+
+    </script>
+
+</body>
+
+</html>

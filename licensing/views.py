@@ -7,7 +7,7 @@ from django.template import loader
 from django.forms import formset_factory, modelformset_factory
 
 from .models import Application, Profile, CITESList
-from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm, SourceOfLumberForm
+from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm, SourceOfLumberForm, SpeciesForm
 from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
 from styleguide_example.files.models import File
@@ -48,7 +48,7 @@ def lumberapplication(request):
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
-            return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source})
+            return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
     # if a GET (or any other method) we'll create a blank form
     else:
         lumber_data = {
@@ -73,7 +73,49 @@ def lumberapplication(request):
         lumber = LumberFormset(lumber_data, prefix='lumber')
         source = SourceFormset(source_data, prefix='source')
         files = FilesFormset(files_data, prefix='files')
-    return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source})
+    return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
+
+def wildlifeapplication(request):
+    # if this is a POST request we need to process the form data
+    if request.user.is_authenticated == False:
+        messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
+        return redirect('/licensing/login')
+    profile = Profile.objects.get(user=request.user)
+    SpeciesFormset = formset_factory(SpeciesForm, extra=5)
+    FilesFormset = modelformset_factory(File, fields=('file',), extra=3)
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        # check whether it's valid:
+        form = ApplicationForm(request.POST)
+        lumber = SpeciesFormset(request.POST, request.FILES, prefix='lumber')
+        files = FilesFormset(request.POST, request.FILES, prefix='files')
+        if form.is_valid() and lumber.is_valid() and files.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:            
+            new_application = add_application(form, request, lumber, files)
+            if new_application != False:
+                messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
+                return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
+            return render(request, 'licensing/wildlife.html', {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        lumber_data = {
+            'lumber-TOTAL_FORMS': '10',
+            'lumber-INITIAL_FORMS': '0',
+            'lumber-MIN_NUM_FORMS': '0',
+            'lumber-MAX_NUM_FORMS': '1000',
+        }
+        files_data = {
+            'files-TOTAL_FORMS': '3',
+            'files-INITIAL_FORMS': '0',
+            'files-MIN_NUM_FORMS': '0',
+            'files-MAX_NUM_FORMS': '1000',
+        }
+        form = ApplicationForm()
+        lumber = SpeciesFormset(lumber_data, prefix='lumber')
+        files = FilesFormset(files_data, prefix='files')
+    return render(request, 'licensing/wildlife.html', {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
 
 def view(request, id):
     context = {}

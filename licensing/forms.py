@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import Application, Profile, Lumber, SourceOfLumber
+from .models import Application, Profile, Lumber, SourceOfLumber, Species
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -51,6 +51,16 @@ class SourceOfLumberForm(ModelForm):
 		
 	def __init__(self, *args, **kwargs):
 		super(SourceOfLumberForm, self).__init__(*args, **kwargs)
+		for field in self.fields:
+			self.fields[field].widget.attrs['class'] = 'form-control ' + field
+
+class SpeciesForm(ModelForm):
+	class Meta:
+		model = Species
+		fields = ['local_name', 'scientific_name', 'country_of_origin', 'CITES_status', 'number_of_individuals', 'class_of_goods', 'identification']
+		
+	def __init__(self, *args, **kwargs):
+		super(SpeciesForm, self).__init__(*args, **kwargs)
 		for field in self.fields:
 			self.fields[field].widget.attrs['class'] = 'form-control ' + field
 
