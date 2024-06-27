@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import Application, Profile, Lumber
+from .models import Application, Profile, Lumber, SourceOfLumber
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -18,7 +18,7 @@ class ApplicationForm(ModelForm):
 	class Meta:
 		model = Application
 		fields = ['type', 'importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
-			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment', 'source_of_lumber', 'licensee_name', 'license_number', 'sawmill_name', 'sawmill_address', 'validity_period'
+			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment',
 			]
 		
 	def __init__(self, *args, **kwargs):
@@ -42,6 +42,16 @@ class LumberForm(ModelForm):
 				self.fields[field].widget.attrs['class'] = 'form-control basicAutoComplete'
 			else:
 				self.fields[field].widget.attrs['class'] = 'form-control ' + field
+
+class SourceOfLumberForm(ModelForm):
+	class Meta:
+		model = SourceOfLumber
+		fields = ['source_of_lumber', 'licensee_name', 'license_number', 'validity_period', 'sawmill_name', 'sawmill_address']
+		
+	def __init__(self, *args, **kwargs):
+		super(SourceOfLumberForm, self).__init__(*args, **kwargs)
+		for field in self.fields:
+			self.fields[field].widget.attrs['class'] = 'form-control ' + field
 
 class ForgotForm(forms.Form):
 	email = forms.EmailField(label = 'Your Email')

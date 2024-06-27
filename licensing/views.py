@@ -7,7 +7,7 @@ from django.template import loader
 from django.forms import formset_factory, modelformset_factory
 
 from .models import Application, Profile, CITESList
-from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm
+from .forms import ApplicationForm, ForgotForm, ProfileForm, LumberForm, SourceOfLumberForm
 from .services import add_application, forgot_code, add_profile
 from styleguide_example.users.models import BaseUser
 from styleguide_example.files.models import File
@@ -29,13 +29,15 @@ def lumberapplication(request):
     if request.user.is_authenticated == False:
         messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
         return redirect('/licensing/login')
-    LumberFormset = formset_factory(LumberForm, extra=3)
+    LumberFormset = formset_factory(LumberForm, extra=5)
+    SourceFormset = formset_factory(SourceOfLumberForm, extra=10)
     FilesFormset = modelformset_factory(File, fields=('file',), extra=3)
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
         form = ApplicationForm(request.POST)
         lumber = LumberFormset(request.POST, request.FILES, prefix='lumber')
+        source = SourceFormset(request.POST, prefix='source')
         files = FilesFormset(request.POST, request.FILES, prefix='files')
         if form.is_valid() and lumber.is_valid() and files.is_valid():
             # process the data in form.cleaned_data as required
@@ -45,14 +47,20 @@ def lumberapplication(request):
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
-            return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files})
+            return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source})
     # if a GET (or any other method) we'll create a blank form
     else:
         lumber_data = {
-            'lumber-TOTAL_FORMS': '5',
+            'lumber-TOTAL_FORMS': '10',
             'lumber-INITIAL_FORMS': '0',
             'lumber-MIN_NUM_FORMS': '0',
             'lumber-MAX_NUM_FORMS': '1000',
+        }
+        source_data = {
+            'source-TOTAL_FORMS': '10',
+            'source-INITIAL_FORMS': '0',
+            'source-MIN_NUM_FORMS': '0',
+            'source-MAX_NUM_FORMS': '1000',
         }
         files_data = {
             'files-TOTAL_FORMS': '3',
@@ -62,8 +70,9 @@ def lumberapplication(request):
         }
         form = ApplicationForm()
         lumber = LumberFormset(lumber_data, prefix='lumber')
+        source = SourceFormset(source_data, prefix='source')
         files = FilesFormset(files_data, prefix='files')
-    return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files})
+    return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source})
 
 def view(request, id):
     context = {}

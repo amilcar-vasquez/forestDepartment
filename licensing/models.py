@@ -44,10 +44,7 @@ class Application(models.Model):
         ('PGIA', 'Philip Goldson International Airport'),
         ('Big Creek', 'Big Creek Port, Stann Creek'),
     )
-    LUMBER_SOURCE_CHOICES = (
-        ('License', 'Forest License'),
-        ('Sawmill', 'Sawmill/Lumber Yard'),
-    )
+    
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
@@ -77,13 +74,8 @@ class Application(models.Model):
     treatment = models.CharField(max_length=100, choices=TREATMENT_CHOICES)
     other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
-    species_details = models.ManyToManyField('Species', blank=True)
-    source_of_lumber = models.CharField(max_length=100, choices=LUMBER_SOURCE_CHOICES, blank=True, null=True)    
-    licensee_name = models.CharField(max_length=100, blank=True, null=True)
-    license_number = models.CharField(max_length=100, blank=True, null=True)  
-    validity_period = models.CharField(max_length=100, blank=True, null=True)
-    sawmill_name = models.CharField(max_length=100, blank=True, null=True)
-    sawmill_address = models.CharField(max_length=200, blank=True, null=True)
+    source_of_lumber = models.ManyToManyField('SourceOfLumber', blank=True)
+    species_details = models.ManyToManyField('Species', blank=True)    
     endorsement_letter = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     cites_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     vet_certificate = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
@@ -111,6 +103,21 @@ class Lumber(models.Model):
 
     def __str__(self):
         return self.scientific_name
+    
+class SourceOfLumber(models.Model):
+    LUMBER_SOURCE_CHOICES = (
+        ('License', 'Forest License'),
+        ('Sawmill', 'Sawmill/Lumber Yard'),
+    )
+    source_of_lumber = models.CharField(max_length=100, choices=LUMBER_SOURCE_CHOICES, blank=True, null=True)    
+    licensee_name = models.CharField(max_length=100, blank=True, null=True)
+    license_number = models.CharField(max_length=100, blank=True, null=True)  
+    validity_period = models.CharField(max_length=100, blank=True, null=True)
+    sawmill_name = models.CharField(max_length=100, blank=True, null=True)
+    sawmill_address = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.source_of_lumber + ' ' + self.licensee_name
     
 class Species(models.Model):
     CITES_CHOICES = (

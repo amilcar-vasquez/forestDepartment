@@ -348,47 +348,7 @@
                                         {{ form.other_treatment.errors }}
                                         {{ form.other_treatment|placeholder:'' }}
                                     </div>
-                                </div>
-                            <div id="source_of_lumber_container">    
-                                <div class="text-center">
-                                    <hr />
-                                    <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
-                                </div>
-                                <div class="form-group">
-                                    <label>Source *</label><br />
-                                    {{ form.source_of_lumber.errors }}
-                                    {{ form.source_of_lumber|placeholder:'' }}
-                                </div>
-                                <div class="form-group row" id="forest_license">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>Licensee Name*</label>
-                                       {{ form.licensee_name.errors }}
-                                       {{ form.licensee_name|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>License Number *</label>
-                                        {{ form.license_number.errors }}
-                                        {{ form.license_number|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Validity Period *</label>
-                                        {{ form.validity_period.errors }}
-                                        {{ form.validity_period|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row" id="sawmill">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>Sawmill Name*</label>
-                                       {{ form.sawmill_name.errors }}
-                                       {{ form.sawmill_name|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Sawmill Address *</label>
-                                        {{ form.sawmill_address.errors }}
-                                        {{ form.sawmill_address|placeholder:'' }}
-                                    </div>
-                                </div>
-                            </div>
+                                </div>                            
                                 <div class="text-center">
                                     <hr />
                                     <span>
@@ -452,6 +412,58 @@
                             </div>
                             {% endfor %}
                             <div class="text-center">
+                                <hr />
+                                <span>
+                                <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
+                                    <div class="col-auto">
+                                    <a href="javascript:none" id="add_source"><i class="fas fa-plus "></i> Add More Fields </a>
+                                    </div>
+                                </span>
+                                {{ form2.management_form }}
+                            </div>
+                            {% for sform in source %}
+                            {% if forloop.first %}
+                            <div id="sform_{{ forloop.counter }}">
+                            {% else %}
+                            <div id="sform_{{ forloop.counter }}" style="display: none;"> 
+                            {% endif %}
+                                <div class="form-group">
+                                    <label>Source *</label><br />
+                                    {{ sform.source_of_lumber.errors }}
+                                    {{ sform.source_of_lumber|placeholder:'' }}
+                                </div>
+                                <div class="form-group row forest_license" id="forest_license_{{ forloop.counter }}" style="display: none">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Licensee Name*</label>
+                                       {{ sform.licensee_name.errors }}
+                                       {{ sform.licensee_name|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>License Number *</label>
+                                        {{ sform.license_number.errors }}
+                                        {{ sform.license_number|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Validity Period *</label>
+                                        {{ sform.validity_period.errors }}
+                                        {{ sform.validity_period|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row sawmill" id="sawmill_{{ forloop.counter }}" style="display: none">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Sawmill Name*</label>
+                                       {{ sform.sawmill_name.errors }}
+                                       {{ sform.sawmill_name|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Sawmill Address *</label>
+                                        {{ sform.sawmill_address.errors }}
+                                        {{ sform.sawmill_address|placeholder:'' }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="text-center">
                                 <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
                                 <hr />
                             </div>
@@ -510,16 +522,27 @@ documents may be requested during the vetting process. If at any point during th
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
     <script type="text/javascript">
-        $( "#id_source_of_lumber" ).change(function(e) {
+        $( ".source_of_lumber" ).change(function(e) {
             e.preventDefault();
 
             var data = $(this).val();
-            if(data == 'License') {
-                $('#forest_license').show();
-                $('#sawmill').hide();
+            var id = $(this).attr('id');
+            if (id == 'id_source-0-source_of_lumber') {
+                if(data == 'License') {
+                    $('#forest_license_1').show();
+                    $('#sawmill_1').hide();
+                } else {
+                    $('#forest_license_1').hide();
+                    $('#sawmill_1').show();
+                }
             } else {
-                $('#forest_license').hide();
-                $('#sawmill').show();
+                if(data == 'License') {
+                    $('#forest_license_' + $(this).attr('data-counter')).show();
+                    $('#sawmill_' + $(this).attr('data-counter')).hide();
+                } else {
+                    $('#forest_license_' + $(this).attr('data-counter')).hide();
+                    $('#sawmill_' + $(this).attr('data-counter')).show();
+                }
             }
         });
         // lets hide the port of exit on type change
@@ -577,7 +600,7 @@ documents may be requested during the vetting process. If at any point during th
         });
         var form_counter = 2;
         $("#add_lumber").on('click', function(){
-            if(form_counter < 6) {
+            if(form_counter < 11) {
                 $("#lform_" + form_counter).show();
                 form_counter++;
             } else {
@@ -585,6 +608,18 @@ documents may be requested during the vetting process. If at any point during th
             }
            
         });
+        var sform_counter = 2;
+        $("#add_source").on('click', function(){
+            if(sform_counter < 6) {
+                id = 'id_source-'+ (sform_counter-1) + '-source_of_lumber';
+                $('#' + id).attr('data-counter', sform_counter);
+                $("#sform_" + sform_counter).show();
+                sform_counter++;
+            } else {
+                $(this).hide();
+            }
+           
+        }); 
 
     </script>
 
