@@ -37,7 +37,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
-                                <h1 class="h4 text-gray-900 mb-4">New Lumber Import Application</h1>
+                                <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
                                 <small>All fields with an * are required fields. </small>
                             </div>
                             <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
@@ -68,11 +68,49 @@
                                     {{ form.type.errors }}
                                     {{ form.type|placeholder:'Application Type'}}             
                                 </div>
-                            <div id="import_container">
+                            <div id="export_container">
+                                <div class="text-center">
+                                    <hr />
+                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label>Exporter Name *</label>
+                                    {{ form.exporter_name.errors }}
+                                    {{ form.exporter_name|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Address *</label>
+                                    {{ form.exporter_address.errors }}
+                                    {{ form.exporter_address|placeholder:'' }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       <label>City *</label>
+                                       {{ form.exporter_city.errors }}
+                                       {{ form.exporter_city|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Zip *</label>
+                                        {{ form.exporter_zip.errors }}
+                                        {{ form.exporter_zip|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>State *</label>
+                                       {{ form.exporter_state.errors }}
+                                       {{ form.exporter_state|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Country *</label>
+                                        {{ form.exporter_country.errors }}
+                                        {{ form.exporter_country|placeholder:'' }}
+                                    </div>
+                                </div>
                                 <div class="text-center">                                   
                                     <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
                                     <hr />
-                                </div>                                
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Contact Name *</label>
@@ -145,46 +183,7 @@
                                         {{ form.importer_country|placeholder:'' }}
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <hr />
-                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
-                                </div>
-                                <div class="form-group">
-                                    <label>Exporter Name *</label>
-                                    {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'' }}
-                                </div>
-                                <div class="form-group">
-                                    <label>Address *</label>
-                                    {{ form.exporter_address.errors }}
-                                    {{ form.exporter_address|placeholder:'' }}
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
-                                       {{ form.exporter_city.errors }}
-                                       {{ form.exporter_city|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Zip *</label>
-                                        {{ form.exporter_zip.errors }}
-                                        {{ form.exporter_zip|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>State *</label>
-                                       {{ form.exporter_state.errors }}
-                                       {{ form.exporter_state|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Country *</label>
-                                        {{ form.exporter_country.errors }}
-                                        {{ form.exporter_country|placeholder:'' }}
-                                    </div>
-                                </div>
                             </div>
-                           
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>
@@ -194,23 +193,13 @@
                                     {{ form.mode_of_transport.errors }}
                                     {{ form.mode_of_transport|placeholder:'' }}
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_bz">
-                                        <label>Port of Entry in Belize *</label>
-                                       {{ form.port_of_entry_bz.errors }}
-                                       {{ form.port_of_entry_bz|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6" id="port_of_exit_int">
-                                        <label>Port of Exit at Origin *</label>
-                                        {{ form.port_of_exit_int.errors }}
-                                        {{ form.port_of_exit_int|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_int" style="display: none;">
+                                <div class="form-group row">                                    
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="port_of_entry_int">
                                         <label>Port of Entry at Destination</label>
                                        {{ form.port_of_entry_int.errors }}
                                        {{ form.port_of_entry_int|placeholder:'' }}
                                     </div>
-                                    <div class="col-sm-6" id="port_of_exit_bz" style="display: none;">
+                                    <div class="col-sm-6" id="port_of_exit_bz">
                                         <label>Port of Exit in Belize *</label>
                                         {{ form.port_of_exit_bz.errors }}
                                         {{ form.port_of_exit_bz|placeholder:'' }}

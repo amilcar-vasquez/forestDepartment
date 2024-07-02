@@ -37,7 +37,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
-                                <h1 class="h4 text-gray-900 mb-4">New Wildlife/Species Application</h1>
+                                <h1 class="h4 text-gray-900 mb-4">New Wildlife/Species Import Application</h1>
                                 <small>All fields with an * are required fields. </small>
                             </div>
                             <form action="/licensing/wildlifeapplication" method="POST" enctype="multipart/form-data" class="user">
@@ -183,128 +183,7 @@
                                         {{ form.exporter_country|placeholder:'' }}
                                     </div>
                                 </div>
-                            </div>
-                            <div id="export_container" style="display: none">
-                                <div class="text-center">
-                                    <hr />
-                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
-                                </div>
-                                <div class="form-group">
-                                    <label>Exporter Name *</label>
-                                    {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'' }}
-                                </div>
-                                <div class="form-group">
-                                    <label>Address *</label>
-                                    {{ form.exporter_address.errors }}
-                                    {{ form.exporter_address|placeholder:'' }}
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
-                                       {{ form.exporter_city.errors }}
-                                       {{ form.exporter_city|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Zip *</label>
-                                        {{ form.exporter_zip.errors }}
-                                        {{ form.exporter_zip|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>State *</label>
-                                       {{ form.exporter_state.errors }}
-                                       {{ form.exporter_state|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Country *</label>
-                                        {{ form.exporter_country.errors }}
-                                        {{ form.exporter_country|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="text-center">                                   
-                                    <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>
-                                    <hr />
-                                </div>
-                                <div class="form-group">
-                                    <label>License Type *:</label>
-                                    {{ form.type.errors }}
-                                    {{ form.type|placeholder:'Application Type'}}             
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>Contact Name *</label>
-                                        {{ form.importer_name.errors }}
-                                        {{ form.importer_name|placeholder:''}}                                        
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Company Name * </label>
-                                        {{ form.importer_company_name.errors }}
-                                        {{ form.importer_company_name|placeholder:'' }}   
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>Importer Email *</label>
-                                        {{ form.importer_email.errors }}
-                                        {{ form.importer_email|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Importer Social Security Number *</label>
-                                        {{ form.importer_social.errors }}
-                                        {{ form.importer_social|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>Importer Phone *</label>
-                                        {{ form.importer_phone.errors }}
-                                        {{ form.importer_phone|placeholder:'' }}
-                                        <small>format: (501) 999-9999 </small>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Business Phone Number *</label>
-                                        {{ form.importer_business_number.errors }}
-                                        {{ form.importer_business_number|placeholder:'' }}
-                                        <small>format: (501) 999-9999 </small>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Business Registration Number *</label>
-                                    {{ form.company_registry_number.errors }}
-                                    {{ form.company_registry_number|placeholder:'' }}
-                                </div>
-                                <div class="form-group">
-                                    <label>Address *</label>
-                                    {{ form.importer_address.errors }}
-                                    {{ form.importer_address|placeholder:'' }}
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
-                                       {{ form.importer_city.errors }}
-                                       {{ form.importer_city|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Zip *</label>
-                                        {{ form.importer_zip.errors }}
-                                        {{ form.importer_zip|placeholder:'' }}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label>State *</label>
-                                       {{ form.importer_state.errors }}
-                                       {{ form.importer_state|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Country *</label>
-                                        {{ form.importer_country.errors }}
-                                        {{ form.importer_country|placeholder:'' }}
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                           
                                 <div class="text-center">
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Shipment Info</h2>

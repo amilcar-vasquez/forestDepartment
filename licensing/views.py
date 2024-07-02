@@ -24,7 +24,7 @@ def index(request):
     return redirect('/licensing/login')
     
 
-def lumberapplication(request):
+def lumberapplication(request, type=''):
     # if this is a POST request we need to process the form data
     if request.user.is_authenticated == False:
         messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
@@ -33,6 +33,10 @@ def lumberapplication(request):
     LumberFormset = formset_factory(LumberForm, extra=5)
     SourceFormset = formset_factory(SourceOfLumberForm, extra=10)
     FilesFormset = modelformset_factory(File, fields=('file',), extra=3)
+    if type == 'import':
+        template = 'licensing/application.html'
+    else:
+        template = 'licensing/export.html'
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
@@ -48,7 +52,7 @@ def lumberapplication(request):
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
-            return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
+            return render(request, template, {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
     # if a GET (or any other method) we'll create a blank form
     else:
         lumber_data = {
@@ -69,13 +73,13 @@ def lumberapplication(request):
             'files-MIN_NUM_FORMS': '0',
             'files-MAX_NUM_FORMS': '1000',
         }
-        form = ApplicationForm()
+        form = ApplicationForm(initial={'type': type})
         lumber = LumberFormset(lumber_data, prefix='lumber')
         source = SourceFormset(source_data, prefix='source')
         files = FilesFormset(files_data, prefix='files')
-    return render(request, 'licensing/application.html', {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
+    return render(request, template, {'form': form, 'form2': lumber, 'files': files, 'source': source, 'profile': profile})
 
-def wildlifeapplication(request):
+def wildlifeapplication(request,type = ''):
     # if this is a POST request we need to process the form data
     if request.user.is_authenticated == False:
         messages.add_message(request, messages.INFO, 'Account is required. Please login or create new account.')
@@ -83,6 +87,10 @@ def wildlifeapplication(request):
     profile = Profile.objects.get(user=request.user)
     SpeciesFormset = formset_factory(SpeciesForm, extra=5)
     FilesFormset = modelformset_factory(File, fields=('file',), extra=3)
+    if type == 'Import':
+        template = 'licensing/wildlife.html'
+    else:
+        template = 'licensing/wildlife_export.html'
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
@@ -97,7 +105,7 @@ def wildlifeapplication(request):
             if new_application != False:
                 messages.add_message(request, messages.SUCCESS, 'Application submitted successfully.')
                 return HttpResponseRedirect('/licensing/qr/'+str(new_application.id))
-            return render(request, 'licensing/wildlife.html', {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
+            return render(request, template, {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
     # if a GET (or any other method) we'll create a blank form
     else:
         lumber_data = {
@@ -112,10 +120,10 @@ def wildlifeapplication(request):
             'files-MIN_NUM_FORMS': '0',
             'files-MAX_NUM_FORMS': '1000',
         }
-        form = ApplicationForm()
+        form = ApplicationForm(initial={'type': type})
         lumber = SpeciesFormset(lumber_data, prefix='lumber')
         files = FilesFormset(files_data, prefix='files')
-    return render(request, 'licensing/wildlife.html', {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
+    return render(request, template, {'form': form, 'form2': lumber, 'files': files, 'profile': profile})
 
 def view(request, id):
     context = {}
