@@ -37,10 +37,10 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img src="{% static 'img/logo-sm.png' %}" width="200" alt="...">
-                                <h1 class="h4 text-gray-900 mb-4">New Lumber Application</h1>
+                                <h1 class="h4 text-gray-900 mb-4">New Lumber Export Application</h1>
                                 <small>All fields with an * are required fields. </small>
                             </div>
-                            <form action="/licensing/lumberapplication" method="POST" enctype="multipart/form-data" class="user">
+                            <form action="/licensing/lumberapplication/Export" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
                                 {% for hidden in form.hidden_fields %}
                                     {{hidden}}
@@ -63,11 +63,6 @@
                                 {% endif %}
                                 <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
                                 <br />
-                                <div class="form-group">
-                                    <label>License Type *:</label>
-                                    {{ form.type.errors }}
-                                    {{ form.type|placeholder:'Application Type'}}             
-                                </div>
                             <div id="export_container">
                                 <div class="text-center">
                                     <hr />

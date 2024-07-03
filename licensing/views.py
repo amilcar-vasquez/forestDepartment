@@ -33,18 +33,18 @@ def lumberapplication(request, type=''):
     LumberFormset = formset_factory(LumberForm, extra=5)
     SourceFormset = formset_factory(SourceOfLumberForm, extra=10)
     FilesFormset = modelformset_factory(File, fields=('file',), extra=3)
-    if type == 'import':
+    if type == 'Import':
         template = 'licensing/application.html'
     else:
         template = 'licensing/export.html'
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
-        form = ApplicationForm(request.POST)
+        form = ApplicationForm(request.POST, request.FILES)
         lumber = LumberFormset(request.POST, request.FILES, prefix='lumber')
         source = SourceFormset(request.POST, prefix='source')
         files = FilesFormset(request.POST, request.FILES, prefix='files')
-        if form.is_valid() and lumber.is_valid() and files.is_valid():
+        if form.is_valid() and lumber.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:            
@@ -94,10 +94,10 @@ def wildlifeapplication(request,type = ''):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         # check whether it's valid:
-        form = ApplicationForm(request.POST)
+        form = ApplicationForm(request.POST, request.FILES)
         lumber = SpeciesFormset(request.POST, request.FILES, prefix='lumber')
         files = FilesFormset(request.POST, request.FILES, prefix='files')
-        if form.is_valid() and lumber.is_valid() and files.is_valid():
+        if form.is_valid() and lumber.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:            

@@ -40,7 +40,7 @@
                                 <h1 class="h4 text-gray-900 mb-4">New Wildlife/Species Import Application</h1>
                                 <small>All fields with an * are required fields. </small>
                             </div>
-                            <form action="/licensing/wildlifeapplication" method="POST" enctype="multipart/form-data" class="user">
+                            <form action="/licensing/wildlifeapplication/Import" method="POST" enctype="multipart/form-data" class="user">
                                 {% csrf_token %}
                                 {% for hidden in form.hidden_fields %}
                                     {{hidden}}
@@ -63,11 +63,6 @@
                                 {% endif %}
                                 <span class="card bg-danger text-white shadow">{{ form.non_field_errors }}</span>
                                 <br />
-                                <div class="form-group">
-                                    <label>License Type *:</label>
-                                    {{ form.type.errors }}
-                                    {{ form.type|placeholder:'Application Type'}}             
-                                </div>
                             <div id="import_container">
                                 <div class="text-center">                                   
                                     <h2 class="h5 text-gray-900 mb-4">Importer Details</h2>

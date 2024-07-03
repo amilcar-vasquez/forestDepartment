@@ -14,7 +14,7 @@ class ApplicationForm(ModelForm):
     )
 	goods = forms.CharField(widget=forms.HiddenInput(), initial='Lumber')
 	treatment = forms.MultipleChoiceField(choices=TREATMENT_CHOICES, required=False, label='Treatment(s)')
-	type = forms.CharField(disabled=True)
+	type = forms.CharField(widget=forms.HiddenInput())
 
 	class Meta:
 		model = Application
