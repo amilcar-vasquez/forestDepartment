@@ -136,16 +136,16 @@ class Species(models.Model):
         ('Pet', 'Pet'),
         ('Other', 'Other'),
     )
-    local_name = models.CharField(max_length=100)
-    scientific_name = models.CharField(max_length=100)
-    country_of_origin = models.CharField(max_length=100)
-    CITES_status = models.CharField(max_length=100, choices=CITES_CHOICES)
-    number_of_individuals = models.IntegerField(default=1)
-    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES)
-    identification = models.CharField(max_length=100)
+    local_name = models.CharField(max_length=100, blank=True, null=True)
+    scientific_name = models.CharField(max_length=100, blank=True, null=True)
+    country_of_origin = models.CharField(max_length=100, blank=True, null=True)
+    CITES_status = models.CharField(max_length=100, choices=CITES_CHOICES, blank=True, null=True)
+    number_of_individuals = models.IntegerField(default=1, blank=True, null=True)
+    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)
+    identification = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.scientific_name
 
 class CITESList(models.Model):
     CITES_CHOICES = (

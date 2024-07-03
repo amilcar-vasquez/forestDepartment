@@ -120,7 +120,7 @@ def wildlifeapplication(request,type = ''):
             'files-MIN_NUM_FORMS': '0',
             'files-MAX_NUM_FORMS': '1000',
         }
-        form = ApplicationForm(initial={'type': type})
+        form = ApplicationForm(initial={'goods': 'Wildlife', 'type': type})
         lumber = SpeciesFormset(lumber_data, prefix='lumber')
         files = FilesFormset(files_data, prefix='files')
     return render(request, template, {'form': form, 'form2': lumber, 'files': files, 'profile': profile})

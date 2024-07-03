@@ -17,7 +17,10 @@ def add_application(form, request, lumber, files):
 			if form2.is_valid() and form2['local_name'].value():
 				lumber = form2.save(commit=False)				
 				lumber.save()
-				member.lumber_details.add(lumber)
+				if member.goods == 'Lumber':
+					member.lumber_details.add(lumber)
+				else:
+					member.species_details.add(lumber)
 		if files.is_valid():
 			files.save(commit=False)
 			for form3 in files:

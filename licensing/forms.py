@@ -56,14 +56,21 @@ class SourceOfLumberForm(ModelForm):
 			self.fields[field].widget.attrs['class'] = 'form-control ' + field
 
 class SpeciesForm(ModelForm):
+	local_name = forms.CharField(widget=forms.TextInput(attrs={
+            'class': 'basicAutoComplete',
+            'data-url': "/licensing/cites_autocomplete/"
+        }), required=False, label='Local Name')
 	class Meta:
 		model = Species
-		fields = ['local_name', 'scientific_name', 'country_of_origin', 'CITES_status', 'number_of_individuals', 'class_of_goods', 'identification']
+		fields = ['scientific_name', 'country_of_origin', 'CITES_status', 'number_of_individuals', 'class_of_goods', 'identification']
 		
 	def __init__(self, *args, **kwargs):
 		super(SpeciesForm, self).__init__(*args, **kwargs)
 		for field in self.fields:
-			self.fields[field].widget.attrs['class'] = 'form-control ' + field
+			if field == 'local_name':
+				self.fields[field].widget.attrs['class'] = 'form-control basicAutoComplete'
+			else:
+				self.fields[field].widget.attrs['class'] = 'form-control ' + field
 
 class ForgotForm(forms.Form):
 	email = forms.EmailField(label = 'Your Email')
