@@ -113,7 +113,7 @@
                                         {{ form.importer_name|placeholder:''}}                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Company Name * </label>
+                                        <label>Company Name</label>
                                         {{ form.importer_company_name.errors }}
                                         {{ form.importer_company_name|placeholder:'' }}   
                                     </div>
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Business Registration Number *</label>
+                                    <label>Business Registration Number</label>
                                     {{ form.company_registry_number.errors }}
                                     {{ form.company_registry_number|placeholder:'' }}
                                 </div>
@@ -156,12 +156,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
+                                       <label>City/Town/Village</label>
                                        {{ form.importer_city.errors }}
                                        {{ form.importer_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Zip *</label>
+                                        <label>Zip</label>
                                         {{ form.importer_zip.errors }}
                                         {{ form.importer_zip|placeholder:'' }}
                                     </div>
@@ -340,39 +340,52 @@
                             </div>
                             {% if profile.profile_type == 'Business' %}
                                 <div class="form-group">
-                                    <label>Packing List</label>
+                                    <label>Packing List *</label><br />
+                                    <small>A Packing List detailing species, product class, dimensions and volume to be exported.</small>
                                     {{ form.packing_list.errors }}
                                     {{ form.packing_list|placeholder:'File' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Performa Invoice</label>
+                                    <label>Performa Invoice *</label>
                                     {{ form.performa_invoice.errors }}
                                     {{ form.performa_invoice|placeholder:'' }}
                                 </div>
                             {% else %}
                                 <div class="form-group">
-                                    <label>Picture of Material</label>
+                                    <label>Picture of Material *</label><br />
+                                    <small> (Note: Attach document with images of material intended for importation)</small>
                                     {{ form.picture_of_material.errors }}
                                     {{ form.picture_of_material|placeholder:'File' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Packing List</label>
+                                    <label>Packing List *</label><br />
+                                    <small>A Packing List detailing species, product class, dimensions and volume to be exported.</small>
                                     {{ form.packing_list.errors }}
                                     {{ form.packing_list|placeholder:'File' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Performa Invoice</label>
+                                    <label>Copy of purchase invoice for the material being exported</label><br />
+                                    <small> (if the exporter is not the licensee)</small>
                                     {{ form.performa_invoice.errors }}
                                     {{ form.performa_invoice|placeholder:'' }}
                                 </div>
                                 <div id="export_docs">
                                     <div class="form-group">
-                                        <label>Proof of zero balance to Forest Department</label>
+                                        <label>Forest License</label><br />
+                                        <small>Copy of Forest License/ Permit under which the material was harvested.
+                                        </small>
+                                        {{ form.forest_license.errors }}
+                                        {{ form.forest_license|placeholder:'File' }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Copy of receipt(s) as proof of payment of royalties</label><br />
+                                        <small>(Note: If material was purchased from a forest license, provide zero balance receipt from licensee)</small>
                                         {{ form.zero_balance_receipt.errors }}
                                         {{ form.zero_balance_receipt|placeholder:'File' }}
                                     </div>
                                     <div class="form-group">
-                                        <label>Sawmill Proof of legal acquisition</label>
+                                        <label>Sawmill Proof of legal acquisition</label><br />
+                                        <small>( Note: Provide invoice from sawmill or forest license where material was purchased from )</small>
                                         {{ form.sawmill_proof.errors }}
                                         {{ form.sawmill_proof|placeholder:'File' }}
                                     </div>

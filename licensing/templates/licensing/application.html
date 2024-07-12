@@ -76,7 +76,7 @@
                                         {{ form.importer_name|placeholder:''}}                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Company Name * </label>
+                                        <label>Company Name</label>
                                         {{ form.importer_company_name.errors }}
                                         {{ form.importer_company_name|placeholder:'' }}   
                                     </div>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Business Registration Number *</label>
+                                    <label>Business Registration Number</label>
                                     {{ form.company_registry_number.errors }}
                                     {{ form.company_registry_number|placeholder:'' }}
                                 </div>
@@ -119,12 +119,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
+                                       <label>City/Town/Village</label>
                                        {{ form.importer_city.errors }}
                                        {{ form.importer_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Zip *</label>
+                                        <label>Zip</label>
                                         {{ form.importer_zip.errors }}
                                         {{ form.importer_zip|placeholder:'' }}
                                     </div>
@@ -143,26 +143,26 @@
                                 </div>
                                 <div class="text-center">
                                     <hr />
-                                    <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
+                                    <h2 class="h5 text-gray-900 mb-4">Source/Origin Details</h2>
                                 </div>
                                 <div class="form-group">
-                                    <label>Exporter Name *</label>
+                                    <label>Name of Origin/Source*</label>
                                     {{ form.exporter_name.errors }}
                                     {{ form.exporter_name|placeholder:'' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Address *</label>
+                                    <label>Address of Origin/Source</label>
                                     {{ form.exporter_address.errors }}
                                     {{ form.exporter_address|placeholder:'' }}
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
+                                       <label>City/Town/Village</label>
                                        {{ form.exporter_city.errors }}
                                        {{ form.exporter_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Zip *</label>
+                                        <label>Zip</label>
                                         {{ form.exporter_zip.errors }}
                                         {{ form.exporter_zip|placeholder:'' }}
                                     </div>
@@ -287,7 +287,7 @@
                                 </div>
                             </div>
                             {% endfor %}
-                            <div class="text-center">
+                           <!-- <div class="text-center">
                                 <hr />
                                 <span>
                                 <h2 class="h5 text-gray-900 mb-4">Source of Lumber</h2>
@@ -338,7 +338,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endfor %}
+                            {% endfor %}-->
                             <div class="text-center">
                                 <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
                                 <hr />
@@ -378,6 +378,11 @@
                                     {{ form.performa_invoice|placeholder:'' }}
                                 </div>
                                 <div id="export_docs">
+                                    <div class="form-group">
+                                        <label>Forest License</label>
+                                        {{ form.forest_license.errors }}
+                                        {{ form.forest_license|placeholder:'File' }}
+                                    </div>
                                     <div class="form-group">
                                         <label>Proof of zero balance to Forest Department</label>
                                         {{ form.zero_balance_receipt.errors }}
