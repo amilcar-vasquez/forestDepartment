@@ -135,6 +135,9 @@ class Species(models.Model):
     CLASS_CHOICES = (
         ('Research', 'Research'),
         ('Pet', 'Pet'),
+        ('Flora', 'Flora'),
+        ('Meat', 'Meat'),
+        ('Throphies', 'Hunting Throphies'),
         ('Other', 'Other'),
     )
     local_name = models.CharField(max_length=100, blank=True, null=True)

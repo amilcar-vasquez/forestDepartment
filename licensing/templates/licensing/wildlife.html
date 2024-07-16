@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Business Registration Number *</label>
+                                    <label>Business Registration Number</label>
                                     {{ form.company_registry_number.errors }}
                                     {{ form.company_registry_number|placeholder:'' }}
                                 </div>
@@ -118,12 +118,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
+                                       <label>City/Town/Village</label>
                                        {{ form.importer_city.errors }}
                                        {{ form.importer_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Zip *</label>
+                                        <label>Zip </label>
                                         {{ form.importer_zip.errors }}
                                         {{ form.importer_zip|placeholder:'' }}
                                     </div>
@@ -156,12 +156,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                       <label>City *</label>
+                                       <label>City/Town/Village</label>
                                        {{ form.exporter_city.errors }}
                                        {{ form.exporter_city|placeholder:'' }}
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Zip *</label>
+                                        <label>Zip</label>
                                         {{ form.exporter_zip.errors }}
                                         {{ form.exporter_zip|placeholder:'' }}
                                     </div>
@@ -210,19 +210,7 @@
                                         {{ form.port_of_exit_bz|placeholder:'' }}
                                     </div>
                                    
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">                                        
-                                    <label>Treatment Type *</label><br />
-                                    {{ form.treatment.errors }}
-                                    {{ form.treatment|placeholder:'' }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Other Treatment (if Other)</label>
-                                        {{ form.other_treatment.errors }}
-                                        {{ form.other_treatment|placeholder:'' }}
-                                    </div>
-                                </div>                            
+                                </div>             
                                 <div class="text-center">
                                     <hr />
                                     <span>
@@ -269,11 +257,13 @@
                                        {{ lform.number_of_individuals.errors }}
                                        {{ lform.number_of_individuals|placeholder:'' }}
                                     </div>
+                                    {% if profile.profile_type == 'Individual' %}
                                     <div class="col-sm-6">
                                         <label>Class of Goods</label>
                                         {{ lform.class_of_goods.errors }}
                                         {{ lform.class_of_goods|placeholder:'' }}
                                     </div>
+                                    {% endif %}
                                 </div>
                                 <div class="form-group">
                                     <label>Identification</label>
@@ -298,14 +288,20 @@
                             </div>
                             {% if profile.profile_type == 'Business' %}
                                 <div class="form-group">
-                                    <label>Packing List</label>
+                                    <label>Packing List *</label>
                                     {{ form.packing_list.errors }}
                                     {{ form.packing_list|placeholder:'File' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Performa Invoice</label>
+                                    <label>Performa Invoice *</label>
                                     {{ form.performa_invoice.errors }}
                                     {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>CITES Permit</label><br />
+                                    <small>(Note: Applicable if flora is a  CITES listed species)</small>
+                                    {{ form.cites_permit.errors }}
+                                    {{ form.cites_permit|placeholder:'' }}
                                 </div>
                             {% else %}
                                 <div class="form-group">
