@@ -20,7 +20,7 @@ class ApplicationForm(ModelForm):
 		model = Application
 		fields = ['importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
 			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment', 'packing_list', 
-			'performa_invoice', 'picture_of_material', 'zero_balance_receipt', 'sawmill_proof', 'forest_license', 'cites_permit'
+			'performa_invoice', 'picture_of_material', 'zero_balance_receipt', 'sawmill_proof', 'forest_license', 'cites_permit', 'export_form', 'certificate_of_origin', 'export_permit', 'legal_acquisition', 'vet_certificate', 'class_of_goods'
 			]
 		
 	def __init__(self, *args, **kwargs):
@@ -62,7 +62,7 @@ class SpeciesForm(ModelForm):
         }), required=False, label='Local Name')
 	class Meta:
 		model = Species
-		fields = ['scientific_name', 'country_of_origin', 'CITES_status', 'number_of_individuals', 'class_of_goods', 'identification']
+		fields = ['scientific_name', 'country_of_origin', 'CITES_status', 'number_of_individuals', 'identification']
 		
 	def __init__(self, *args, **kwargs):
 		super(SpeciesForm, self).__init__(*args, **kwargs)

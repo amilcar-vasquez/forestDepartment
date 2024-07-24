@@ -44,7 +44,13 @@ class Application(models.Model):
         ('PGIA', 'Philip Goldson International Airport'),
         ('Big Creek', 'Big Creek Port, Stann Creek'),
     )
-    
+    CLASS_CHOICES = (
+        ('Research', 'Research'),
+        ('Pet', 'Pet'),
+        ('Flora', 'Flora'),
+        ('Meat', 'Meat'),
+        ('Throphies', 'Hunting Throphies')
+    )
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
     importer_name = models.CharField(max_length=100)
@@ -75,7 +81,8 @@ class Application(models.Model):
     other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     source_of_lumber = models.ManyToManyField('SourceOfLumber', blank=True)
-    species_details = models.ManyToManyField('Species', blank=True)    
+    species_details = models.ManyToManyField('Species', blank=True)
+    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)    
     endorsement_letter = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     cites_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     forest_license = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
@@ -86,6 +93,10 @@ class Application(models.Model):
     picture_of_material = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
     zero_balance_receipt = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     sawmill_proof = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    export_form = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    certificate_of_origin = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    legal_acquisition = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    export_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     files = models.ManyToManyField(File, blank=True)
     date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)
@@ -132,20 +143,12 @@ class Species(models.Model):
         ('Appendix III', 'Appendix III'),
         ('Not Listed', 'Not Listed'),
     )
-    CLASS_CHOICES = (
-        ('Research', 'Research'),
-        ('Pet', 'Pet'),
-        ('Flora', 'Flora'),
-        ('Meat', 'Meat'),
-        ('Throphies', 'Hunting Throphies'),
-        ('Other', 'Other'),
-    )
+    
     local_name = models.CharField(max_length=100, blank=True, null=True)
     scientific_name = models.CharField(max_length=100, blank=True, null=True)
     country_of_origin = models.CharField(max_length=100, blank=True, null=True)
     CITES_status = models.CharField(max_length=100, choices=CITES_CHOICES, blank=True, null=True)
-    number_of_individuals = models.IntegerField(default=1, blank=True, null=True)
-    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)
+    number_of_individuals = models.IntegerField(default=1, blank=True, null=True)    
     identification = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
