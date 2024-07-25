@@ -212,6 +212,13 @@
                                     </span>
                                     {{ form2.management_form }}
                                 </div>
+                                {% if profile.profile_type == 'Individual' %}
+                                    <div class="form-group">
+                                        <label>Class of Goods</label>
+                                        {{ form.class_of_goods.errors }}
+                                        {{ form.class_of_goods|placeholder:'' }}
+                                    </div>
+                                {% endif %}
                             {% for lform in form2 %}
                             {% if forloop.first %}
                             <div id="lform_{{ forloop.counter }}">
@@ -248,11 +255,7 @@
                                        {{ lform.number_of_individuals.errors }}
                                        {{ lform.number_of_individuals|placeholder:'' }}
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label>Class of Goods</label>
-                                        {{ lform.class_of_goods.errors }}
-                                        {{ lform.class_of_goods|placeholder:'' }}
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label>Identification</label>
@@ -277,37 +280,63 @@
                             </div>
                             {% if profile.profile_type == 'Business' %}
                                 <div class="form-group">
-                                    <label>Packing List</label>
+                                    <label>Packing List *</label>
                                     {{ form.packing_list.errors }}
                                     {{ form.packing_list|placeholder:'File' }}
                                 </div>
                                 <div class="form-group">
-                                    <label>Performa Invoice</label>
+                                    <label>Performa Invoice *</label>
                                     {{ form.performa_invoice.errors }}
                                     {{ form.performa_invoice|placeholder:'' }}
+                                </div>
+                                <div class="form-group">
+                                    <label>CITES Permit</label><br />
+                                    <small>(Note: Applicable if flora is a  CITES listed species)</small>
+                                    {{ form.cites_permit.errors }}
+                                    {{ form.cites_permit|placeholder:'' }}
                                 </div>
                             {% else %}
-                                <div class="form-group">
-                                    <label>Picture of Material</label>
-                                    {{ form.picture_of_material.errors }}
-                                    {{ form.picture_of_material|placeholder:'File' }}
-                                </div>
-                                <div class="form-group">
+                               
+                                <div class="form-group" id="p_packinglist">
                                     <label>Packing List</label>
                                     {{ form.packing_list.errors }}
                                     {{ form.packing_list|placeholder:'File' }}
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="p_pinvoice">
                                     <label>Performa Invoice</label>
                                     {{ form.performa_invoice.errors }}
                                     {{ form.performa_invoice|placeholder:'' }}
                                 </div>
-                                <div id="export_docs">
-                                    <div class="form-group">
-                                        <label>Proof of zero balance to Forest Department</label>
-                                        {{ form.zero_balance_receipt.errors }}
-                                        {{ form.zero_balance_receipt|placeholder:'File' }}
-                                    </div>
+                                <div class="form-group" id="p_exportform">
+                                    <label>Export Declaration Form</label>
+                                    {{ form.export_form.errors }}
+                                    {{ form.export_form|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_citespermit">
+                                    <label>Research Permit</label>
+                                    {{ form.cites_permit.errors }}
+                                    {{ form.cites_permit|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_certificateoforigin">
+                                    <label>Certificate of Origin</label>
+                                    {{ form.certificate_of_origin.errors }}
+                                    {{ form.certificate_of_origin|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_vetcertificate">
+                                    <label>Certified Veterinary Clearance</label>
+                                    {{ form.vet_certificate.errors }}
+                                    {{ form.vet_certificate|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_legalacquisition">
+                                    <label>Legal Acquisition</label>
+                                    <small>Hunting permit, tags, invoice from taxidermy company</small>
+                                    {{ form.legal_acquisition.errors }}
+                                    {{ form.legal_acquisition|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_exportpermit">
+                                    <label>Permit from Exporting Country</label>
+                                    {{ form.export_permit.errors }}
+                                    {{ form.export_permit|placeholder:'' }}
                                 </div>
                             {% endif %}
                             <div class="text-center">
@@ -395,6 +424,63 @@ documents may be requested during the vetting process. If at any point during th
                 $("#port_of_exit_int").hide();
                 $("#export_docs").show();
             }
+        });
+        //Lets show the relevant files for personal import
+        $("#id_class_of_goods").change(function(e) {
+            e.preventDefault();
+            var data = $(this).val();
+            if(data == 'Research') {
+                $("#p_packinglist").show();
+                $("#p_citespermit").show();
+                // hide the rest                
+                $("#p_pinvoice").hide();
+                $("#p_exportform").hide();
+                $("#p_certificateoforigin").hide();
+                $("#p_vetcertificate").hide();
+                $("#p_legalacquisition").hide();
+                $("#p_exportpermit").hide();
+            } else if (data == 'Pet') {               
+                $("#p_pinvoice").show();
+                $("#p_certificateoforigin").show();
+                $("#p_vetcertificate").show();
+                $("#p_exportpermit").show();
+                // hide the rest                
+                $("#p_packinglist").hide();
+                $("#p_citespermit").hide();
+                $("#p_exportform").hide();
+                $("#p_legalacquisition").hide();                
+            } else if(data == 'Flora') {
+                $("#p_packinglist").show();
+                $("#p_pinvoice").show();                
+                $("#p_exportform").show();
+                // hide the rest 
+                $("#p_citespermit").hide();
+                $("#p_certificateoforigin").hide();
+                $("#p_vetcertificate").hide();
+                $("#p_legalacquisition").hide();
+                $("#p_exportpermit").hide();
+            } else if(data == 'Meat') {
+                $("#p_legalacquisition").show();
+                $("#p_exportform").show();              
+                // hide the rest 
+                $("#p_exportpermit").hide(); 
+                $("#p_packinglist").hide();
+                $("#p_pinvoice").hide();
+                $("#p_citespermit").hide();
+                $("#p_certificateoforigin").hide();
+                $("#p_vetcertificate").hide();
+                
+            } else if (data == 'Throphies') {
+                $("#p_pinvoice").show();
+                $("#p_legalacquisition").show();
+                $("#p_exportpermit").show();               
+                // hide the rest 
+                $("#p_packinglist").hide();                                
+                $("#p_exportform").hide();
+                $("#p_citespermit").hide();
+                $("#p_certificateoforigin").hide();
+                $("#p_vetcertificate").hide();
+            }  
         });
         //convert BDFT to cubic meters and vice versa
         $('.quantity').on('input', function() {
