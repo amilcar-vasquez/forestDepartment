@@ -104,6 +104,7 @@ class Application(models.Model):
     certificate_of_origin = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     legal_acquisition = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     export_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
+    business_registry_document = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     files = models.ManyToManyField(File, blank=True)
     date_received = models.DateField(default=date.today)
     date_approved = models.DateField(blank=True, null=True)

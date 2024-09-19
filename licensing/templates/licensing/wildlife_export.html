@@ -376,6 +376,16 @@
                                     {{ form.export_permit.errors }}
                                     {{ form.export_permit|placeholder:'' }}
                                 </div>
+                                <div class="form-group" id="p_businessdocument">
+                                    <label>Business Registry Document</label>
+                                    {{ form.business_registry_document.errors }}
+                                    {{ form.business_registry_document|placeholder:'' }}
+                                </div>
+                                <div class="form-group" id="p_applicantid">
+                                    <label>Applicant ID</label>
+                                    {{ form.id_document.errors }}
+                                    {{ form.id_document|placeholder:'' }}
+                                </div>
                             {% endif %}
                             <div class="text-center">
                                 <hr />

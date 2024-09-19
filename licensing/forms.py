@@ -20,7 +20,7 @@ class ApplicationForm(ModelForm):
 		model = Application
 		fields = ['importer_name', 'importer_company_name', 'company_registry_number', 'importer_address', 'importer_phone', 'importer_email', 'importer_city', 'importer_zip', 'importer_state', 'importer_country', 'importer_social', 'importer_business_number',
 			'exporter_name', 'exporter_address', 'exporter_city', 'exporter_zip', 'exporter_state', 'exporter_country', 'exporter_company_name', 'exporter_email', 'exporter_social', 'exporter_id_number', 'exporter_business_number', 'exporter_phone', 'exporter_registry_number', 'mode_of_transport', 'port_of_entry_bz', 'port_of_entry_int', 'port_of_exit_bz', 'port_of_exit_int', 'other_treatment', 'packing_list', 
-			'performa_invoice', 'picture_of_material', 'zero_balance_receipt', 'sawmill_proof', 'forest_license', 'cites_permit', 'export_form', 'certificate_of_origin', 'export_permit', 'legal_acquisition', 'vet_certificate', 'class_of_goods'
+			'performa_invoice', 'picture_of_material', 'zero_balance_receipt', 'sawmill_proof', 'forest_license', 'cites_permit', 'export_form', 'certificate_of_origin', 'export_permit', 'legal_acquisition', 'vet_certificate', 'class_of_goods', 'business_registry_document', 'id_document'
 			]
 		
 	def __init__(self, *args, **kwargs):
