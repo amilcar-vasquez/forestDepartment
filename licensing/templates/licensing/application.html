@@ -382,27 +382,6 @@
                                 {{ form.performa_invoice.errors }}
                                 {{ form.performa_invoice|placeholder:'' }}
                             </div>
-                            <div id="export_docs">
-                                <div class="form-group">
-                                    <label>Forest License</label><br />
-                                    <small>Copy of Forest License/ Permit under which the material was harvested.
-                                    </small>
-                                    {{ form.forest_license.errors }}
-                                    {{ form.forest_license|placeholder:'File' }}
-                                </div>
-                                <div class="form-group">
-                                    <label>Copy of receipt(s) as proof of payment of royalties</label><br />
-                                    <small>(Note: If material was purchased from a forest license, provide zero balance receipt from licensee)</small>
-                                    {{ form.zero_balance_receipt.errors }}
-                                    {{ form.zero_balance_receipt|placeholder:'File' }}
-                                </div>
-                                <div class="form-group">
-                                    <label>Sawmill Proof of legal acquisition</label><br />
-                                    <small>( Note: Provide invoice from sawmill or forest license where material was purchased from )</small>
-                                    {{ form.sawmill_proof.errors }}
-                                    {{ form.sawmill_proof|placeholder:'File' }}
-                                </div>
-                            </div>
                         {% endif %}
                             <div class="text-center">
                                 <hr />

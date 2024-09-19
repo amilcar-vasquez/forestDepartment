@@ -68,10 +68,48 @@
                                     <hr />
                                     <h2 class="h5 text-gray-900 mb-4">Exporter Details</h2>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Exporter Name *</label>
+                                        {{ form.exporter_name.errors }}
+                                        {{ form.exporter_name|placeholder:''}}                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Company Name * </label>
+                                        {{ form.exporter_company_name.errors }}
+                                        {{ form.exporter_company_name|placeholder:'' }}   
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Exporter Email *</label>
+                                        {{ form.exporter_email.errors }}
+                                        {{ form.exporter_email|placeholder:'' }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Exporter Social Security Number *</label>
+                                        {{ form.exporter_social.errors }}
+                                        {{ form.exporter_social|placeholder:'' }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Exporter Phone *</label>
+                                        {{ form.exporter_phone.errors }}
+                                        {{ form.exporter_phone|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Business Phone Number *</label>
+                                        {{ form.exporter_business_number.errors }}
+                                        {{ form.exporter_business_number|placeholder:'' }}
+                                        <small>format: (501) 999-9999 </small>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <label>Exporter Name *</label>
-                                    {{ form.exporter_name.errors }}
-                                    {{ form.exporter_name|placeholder:'' }}
+                                    <label>Business Registration Number</label>
+                                    {{ form.exporter_registry_number.errors }}
+                                    {{ form.exporter_registry_number|placeholder:'' }}
                                 </div>
                                 <div class="form-group">
                                     <label>Address *</label>

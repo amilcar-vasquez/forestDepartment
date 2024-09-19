@@ -297,7 +297,7 @@
                                     {{ sform.source_of_lumber.errors }}
                                     {{ sform.source_of_lumber|placeholder:'' }}
                                 </div>
-                                <div class="form-group row forest_license" id="forest_license_{{ forloop.counter }}" style="display: none">
+                                <div class="form-group row forest_license" id="forest_license_{{ forloop.counter }}">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Licensee Name*</label>
                                        {{ sform.licensee_name.errors }}
@@ -354,7 +354,7 @@
                             {% else %}
                                 <div class="form-group">
                                     <label>Picture of Material *</label><br />
-                                    <small> (Note: Attach document with images of material intended for importation)</small>
+                                    <small> (Note: Attach document with images of material intended for Exportation)</small>
                                     {{ form.picture_of_material.errors }}
                                     {{ form.picture_of_material|placeholder:'File' }}
                                 </div>
@@ -440,7 +440,6 @@ documents may be requested during the vetting process. If at any point during th
                     $('#forest_license_1').show();
                     $('#sawmill_1').hide();
                 } else {
-                    $('#forest_license_1').hide();
                     $('#sawmill_1').show();
                 }
             } else {
@@ -448,7 +447,6 @@ documents may be requested during the vetting process. If at any point during th
                     $('#forest_license_' + $(this).attr('data-counter')).show();
                     $('#sawmill_' + $(this).attr('data-counter')).hide();
                 } else {
-                    $('#forest_license_' + $(this).attr('data-counter')).hide();
                     $('#sawmill_' + $(this).attr('data-counter')).show();
                 }
             }
