@@ -253,11 +253,9 @@
                                     <hr />
                                     <span>
                                     <h2 class="h5 text-gray-900 mb-4">Species Details</h2>
-                                        <div class="col-auto">
-                                        <a href="javascript:void(0)" id="add_lumber"><i class="fas fa-plus "></i> Add More Fields </a>
-                                        </div>
-                                    </span>
+                                    
                                     {{ form2.management_form }}
+                                    
                                 </div>
                                 {% if profile.profile_type == 'Individual' %}
                                     <div class="form-group">
@@ -266,6 +264,23 @@
                                         {{ form.class_of_goods|placeholder:'' }}
                                     </div>
                                 {% endif %}
+                                <small>To submit the species details please do the following:
+                                    <ol>
+                                        <li>Download the spreadsheet template by clicking the link above.</li>
+                                        <li>Fill out the spreadsheet with the species details.</li>
+                                        <li>Upload the spreadsheet using the button below.</li>
+                                    </ol>
+                                </small>
+                                    <div class="col-auto">
+                                    <a href="https://spreadsheets.google.com/feeds/download/spreadsheets/Export?key=1FXVhcAfRvytHNanNgpiv8YtHTbxSaGB0bkHNkGGb2X0&exportFormat=xlsx" target="_blank"><b>Download Spreadsheet Template</b> </a><br>
+                                    </div>
+                                </span>
+                                <div class="form-group">
+                                    <label>Species Details Spreadsheet Upload</label>
+                                    {{ form.species_details.errors }}
+                                    {{ form.species_details|placeholder:'' }}
+                                </div>
+                            <!-- Species Details   
                             {% for lform in form2 %}
                             {% if forloop.first %}
                             <div id="lform_{{ forloop.counter }}">
@@ -313,7 +328,7 @@
                                     <hr />
                                 </div>
                             </div>
-                            {% endfor %}                           
+                            {% endfor %}  -->                          
                             <div class="text-center">
                                 <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
                                 <hr />

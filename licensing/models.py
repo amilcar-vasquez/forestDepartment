@@ -88,7 +88,6 @@ class Application(models.Model):
     other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     source_of_lumber = models.ManyToManyField('SourceOfLumber', blank=True)
-    species_details = models.ManyToManyField('Species', blank=True)
     class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)    
     endorsement_letter = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     cites_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
@@ -113,6 +112,7 @@ class Application(models.Model):
     approval = models.CharField(max_length=100, choices=APPROVAL_CHOICES, blank=True, null=True, default='In Review')
     permit_number = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, blank=True, null=True)
+    species_details = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
 
     def __str__(self):
         return self.importer_name

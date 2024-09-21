@@ -263,6 +263,23 @@
                             {% else %}
                             <div id="lform_{{ forloop.counter }}" style="display: none;"> 
                             {% endif %}
+                            <small>To submit the species details please do the following:
+                                <ol>
+                                    <li>Download the spreadsheet template by clicking the link above.</li>
+                                    <li>Fill out the spreadsheet with the species details.</li>
+                                    <li>Upload the spreadsheet using the button below.</li>
+                                </ol>
+                            </small>
+                                <div class="col-auto">
+                                <a href="https://spreadsheets.google.com/feeds/download/spreadsheets/Export?key=1FXVhcAfRvytHNanNgpiv8YtHTbxSaGB0bkHNkGGb2X0&exportFormat=xlsx" target="_blank"><b>Download Spreadsheet Template</b> </a><br>
+                                </div>
+                            </span>
+                            <div class="form-group">
+                                <label>Species Details Spreadsheet Upload</label>
+                                {{ form.species_details.errors }}
+                                {{ form.species_details|placeholder:'' }}
+                            </div>
+                            <!-- remove form species details
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Local Name</label>
@@ -304,7 +321,8 @@
                                     <hr />
                                 </div>
                             </div>
-                            {% endfor %}                           
+                            {% endfor %}   
+                            -->                        
                             <div class="text-center">
                                 <small>N.B. i. A packing list detailing species, product class, dimensions and volume (BDFT) and ii. a proforma invoice as per produce description above must be attached to this application. </small>
                                 <hr />
