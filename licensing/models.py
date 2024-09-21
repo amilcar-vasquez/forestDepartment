@@ -45,11 +45,20 @@ class Application(models.Model):
         ('Big Creek', 'Big Creek Port, Stann Creek'),
     )
     CLASS_CHOICES = (
+        ('Butterflies', 'Butterflies'),
+        ('Beetles', 'Beetles'),
+        ('Tissue Samples', 'Tissue Samples'),
+        ('Seeds and Bulbs', 'Seeds and Bulbs'),
+        ('Orchid', 'Orchid'),
+        ('Cacti', 'Cacti'),
+        ('Fauna', 'Fauna'),
+        ('Other', 'Other')
+    )
+    REASON_CHOICES = (
         ('Research', 'Research'),
-        ('Pet', 'Pet'),
-        ('Flora', 'Flora'),
+        ('Companion Species', 'Companion Species'),
         ('Meat', 'Meat'),
-        ('Throphies', 'Hunting Throphies')
+        ('Trophies', 'Trophy hunting')
     )
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     goods = models.CharField(max_length=100, choices=GOODS_CHOICES)
@@ -88,7 +97,8 @@ class Application(models.Model):
     other_treatment = models.CharField(max_length=100, blank=True, null=True)
     lumber_details = models.ManyToManyField('Lumber', blank=True)
     source_of_lumber = models.ManyToManyField('SourceOfLumber', blank=True)
-    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)    
+    class_of_goods = models.CharField(max_length=100, choices=CLASS_CHOICES, blank=True, null=True)
+    reason_for_import_export = models.CharField(max_length=100, choices=REASON_CHOICES, blank=True, null=True)    
     endorsement_letter = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     cites_permit = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)
     forest_license = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True, null=True)

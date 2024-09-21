@@ -250,13 +250,16 @@
                                     </span>
                                     {{ form2.management_form }}
                                 </div>
-                                {% if profile.profile_type == 'Individual' %}
                                     <div class="form-group">
-                                        <label>Class of Goods</label>
+                                        <label>Type of Produce to be Imported/Exported</label>
                                         {{ form.class_of_goods.errors }}
                                         {{ form.class_of_goods|placeholder:'' }}
                                     </div>
-                                {% endif %}
+                                    <div class="form-group"></div>
+                                        <label>Reason for Import/Export</label>
+                                        {{ form.reason_for_import_export.errors }}
+                                        {{ form.reason_for_import_export|placeholder:'' }}
+                                    </div>
                             {% for lform in form2 %}
                             {% if forloop.first %}
                             <div id="lform_{{ forloop.counter }}">
